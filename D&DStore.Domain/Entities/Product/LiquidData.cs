@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace D_DStore.Domain.Entities.Product
+{
+    public class LiquidData : ProductData
+    {
+        public int Volume { get; set; }
+        public string Flavors { get; set; } = string.Empty;
+        public int Nicotine { get; set; }
+        public int IceLevel { get; set; }
+    }
+}
