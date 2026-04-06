@@ -33,3 +33,4 @@ C:\Users\dimao\source\repos\DotnetBackEnd\Control\bin\Debug\net9.0\Swashbuckle.A
 C:\Users\dimao\source\repos\DotnetBackEnd\Control\obj\Debug\net9.0\Control.csproj.AssemblyReference.cache
 C:\Users\dimao\source\repos\DotnetBackEnd\Control\obj\Debug\net9.0\Control.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\dimao\source\repos\DotnetBackEnd\Control\obj\Debug\net9.0\Control.csproj.Up2Date
+C:\Users\dimao\source\repos\DotnetBackEnd\Control\obj\Debug\net9.0\Control.sourcelink.json
