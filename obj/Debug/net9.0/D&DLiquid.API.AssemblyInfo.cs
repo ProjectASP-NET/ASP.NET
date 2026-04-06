@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("D&DLiquid.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7389a6e065f0e66219284ad5369b3a678fb3c5a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0d40cdf6fd63c53bb687244e72759a4489f5b18")]
 [assembly: System.Reflection.AssemblyProductAttribute("D&DLiquid.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("D&DLiquid.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
