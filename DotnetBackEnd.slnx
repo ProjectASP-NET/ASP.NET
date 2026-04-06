@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Control/D&amp;DLiquid.API.csproj" Id="3e34a7f7-efb9-497b-ba0d-b1e01375468b" />
+  <Project Path="D&amp;DStore.BusinessLogic/D&amp;DLiquidBusinessLogic.csproj" Id="f9eed2e8-d0e5-4b84-9f87-8ef5ff762e41" />
+  <Project Path="D&amp;DStore.DataAccess/D&amp;DLiquid.DataAccess.csproj" Id="9bcac42e-a77f-4a8a-a761-e613d1b20060" />
+  <Project Path="D&amp;DStore.Domain/D&amp;DLiquid.Domain.csproj" Id="6264ae09-594c-4eed-9bc7-b8193c5607f7" />
+</Solution>
