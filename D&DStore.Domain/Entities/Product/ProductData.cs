@@ -6,14 +6,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using D_DStore.Domain.Entities.References;
 
 namespace D_DStore.Domain.Entities.Product
 {
-    public class ProductData
+    public class ProductData : Refs
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
+        [StringLength(50), MinLength(5)]
         public string Name { get; set; } = string.Empty;
         public string? Brand { get; set; }
         public string? Description { get; set; }
