@@ -1,16 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>D_DStore.BusinessLogic</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\D&amp;DLiquid.DataAccess\D&amp;DLiquid.DataAccess.csproj">
       <TreatAsUsed>true</TreatAsUsed>
     </ProjectReference>
+    <ProjectReference Include="..\D&amp;DLiquid.Domain\D&amp;DLiquid.Domain.csproj" />
   </ItemGroup>
 
 </Project>
