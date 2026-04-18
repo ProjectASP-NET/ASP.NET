@@ -2,7 +2,7 @@ using D_DStore.DataAccess.DB;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var DBconnection = builder.Configuration.GetConnectionString("DBconnetion");
+var DBconnection = builder.Configuration.GetConnectionString("DBconnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(DBconnection));
 builder.Services.AddEndpointsApiExplorer();

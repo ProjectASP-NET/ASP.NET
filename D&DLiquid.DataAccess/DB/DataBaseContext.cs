@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using D_DStore.Domain.Entities.Product;
 using Microsoft.EntityFrameworkCore;
+//Для себя пока оставил команды по работе с БД,по концу их не будет.
+//dotnet ef migrations add
+//dotnet ef database update --startup-project ../Control
 
 namespace D_DStore.DataAccess.DB
 {
