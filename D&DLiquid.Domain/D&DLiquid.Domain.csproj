@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Product\Liquid\" />
-  </ItemGroup>
-
 </Project>

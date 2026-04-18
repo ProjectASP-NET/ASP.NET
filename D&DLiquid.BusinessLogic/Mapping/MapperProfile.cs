@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using D_DStore.Domain.Entities.Product;
+using D_DStore.Domain.Models.Product;
+
+namespace D_DStore.BusinessLogic.Mapping
+{
+    public class MapperProfile : AutoMapper.Profile
+    {
+                public MapperProfile()
+        {
+            CreateMap<ProductData, ProductDataDTO>().ReverseMap();
+            CreateMap<LiquidData, LiquidDTO>()
+                .IncludeBase<ProductData, ProductDataDTO>()
+                .ReverseMap();
+            CreateMap<VapeData, VapeDTO>()
+               .IncludeBase<ProductData, ProductDataDTO>()
+               .ReverseMap();
+            CreateMap<ConsumableData, ConsumableDTO>()
+               .IncludeBase<ProductData, ProductDataDTO>()
+               .ReverseMap();
+        }
+    }
+}

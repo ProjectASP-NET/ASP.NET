@@ -9,7 +9,7 @@ namespace D_DStore.Domain.Entities.Product
     public class LiquidData : ProductData
     {
         public int Volume { get; set; }
-        public string Flavors { get; set; } = string.Empty;
+        public string[] Flavors { get; set; } = Array.Empty<string>();
         public int Nicotine { get; set; }
         public int IceLevel { get; set; }
     }
