@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace D_DStore.Domain.Models.Product
 {
-    public class LiquidDTO
+    public class LiquidDTO : ProductDTO
     {
         public int Volume { get; set; }
         public string Flavors { get; set; } = string.Empty;

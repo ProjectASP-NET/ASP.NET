@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace D_DStore.Domain.Models.Product
 {
-    internal class ConsumableDTO
+    public class ConsumableDTO : ProductDTO
     {
     }
 }
