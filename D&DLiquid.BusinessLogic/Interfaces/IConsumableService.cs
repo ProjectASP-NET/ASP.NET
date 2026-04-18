@@ -5,7 +5,7 @@ using D_DStore.Domain.Models.Product;
 
 namespace D_DStore.BusinessLogic.Interfaces
 {
-    public interface IConsumable
+    public interface IConsumableService
     {
         Task<IEnumerable<ConsumableDTO>> GetAllAsync();
         Task<ConsumableDTO?> GetByIdAsync(int id);

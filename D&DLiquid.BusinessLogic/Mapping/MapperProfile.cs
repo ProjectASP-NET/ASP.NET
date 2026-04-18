@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoMapper;
 using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Models.Product;
 
 namespace D_DStore.BusinessLogic.Mapping
 {
-    public class MapperProfile : AutoMapper.Profile
+    public class MapperProfile : Profile
     {
                 public MapperProfile()
         {

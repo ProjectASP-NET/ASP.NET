@@ -5,7 +5,7 @@ using D_DStore.Domain.Models.Product;
 
 namespace D_DStore.BusinessLogic.Interfaces
 {
-    public interface IVape
+    public interface IVapeService
     {
         Task<IEnumerable<VapeDTO>> GetAllAsync();
         Task<VapeDTO?> GetByIdAsync(int id);

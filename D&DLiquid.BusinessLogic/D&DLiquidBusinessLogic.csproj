@@ -18,8 +18,4 @@
     <ProjectReference Include="..\D&amp;DLiquid.Domain\D&amp;DLiquid.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

@@ -5,7 +5,7 @@ using D_DStore.Domain.Models.Product;
 
 namespace D_DStore.BusinessLogic.Interfaces
 {
-    public interface ILiquid
+    public interface ILiquidService
     {
         Task<IEnumerable<LiquidDTO>> GetAllAsync();
         Task<LiquidDTO?> GetByIdAsync(int id);
