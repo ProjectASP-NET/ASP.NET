@@ -9,38 +9,43 @@ using D_DStore.Domain.Models.Product;
 
 namespace D_DStore.BusinessLogic.Services
 {
-    public class VapeService : IVapeService
+    public class ConsumableServices : IConsumableService
     {
-        private readonly IRepository<VapeData> _repo;
+        private readonly IRepository<ConsumableData> _repo;
         private readonly IMapper _mapper;
-        public VapeService(IRepository<VapeData> repo, IMapper mapper)
+
+        public ConsumableServices(IRepository<ConsumableData> repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<VapeDTO>> GetAllAsync()
+
+        public async Task<IEnumerable<ConsumableDTO>> GetAllAsync()
         {
             var entities = await _repo.GetAllAsync();
-            return _mapper.Map<IEnumerable<VapeDTO>>(entities);
-        }
-        public async Task<VapeDTO?> GetByIdAsync(int id)
-        {
-            var entity = await _repo.GetByIdAsync(id);
-            return entity is null ? null : _mapper.Map<VapeDTO>(entity);
+            return _mapper.Map<IEnumerable<ConsumableDTO>>(entities);
         }
 
-        public async Task<VapeDTO> CreateAsync(VapeDTO dto)
+        public async Task<ConsumableDTO?> GetByIdAsync(int id)
         {
-            var entity = _mapper.Map<VapeData>(dto);
+            var entity = await _repo.GetByIdAsync(id);
+            return entity is null ? null : _mapper.Map<ConsumableDTO>(entity);
+        }
+
+        public async Task<ConsumableDTO> CreateAsync(ConsumableDTO dto)
+        {
+            var entity = _mapper.Map<ConsumableData>(dto);
             var created = await _repo.CreateAsync(entity);
-            return _mapper.Map<VapeDTO>(created);
+            return _mapper.Map<ConsumableDTO>(created);
         }
-        public async Task<VapeDTO?> UpdateAsync(int id, VapeDTO dto)
+
+        public async Task<ConsumableDTO?> UpdateAsync(int id, ConsumableDTO dto)
         {
-            var entity = _mapper.Map<VapeData>(dto);
+            var entity = _mapper.Map<ConsumableData>(dto);
             var updated = await _repo.UpdateAsync(id, entity);
-            return updated is null ? null : _mapper.Map<VapeDTO>(updated);
+            return updated is null ? null : _mapper.Map<ConsumableDTO>(updated);
         }
+
         public async Task<bool> DeleteAsync(int id)
             => await _repo.DeleteAsync(id);
     }

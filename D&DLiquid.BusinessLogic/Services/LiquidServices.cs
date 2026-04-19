@@ -10,12 +10,12 @@ using AutoMapper;
 
 namespace D_DStore.BusinessLogic.Services
 {
-    public class LiquidService : ILiquidService
+    public class LiquidServices : ILiquidService
     {
         private readonly IRepository<LiquidData> _repo;
         private readonly IMapper _mapper;
 
-        public LiquidService(IRepository<LiquidData> repo, IMapper mapper)
+        public LiquidServices(IRepository<LiquidData> repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
