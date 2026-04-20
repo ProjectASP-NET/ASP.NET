@@ -25,7 +25,7 @@ namespace Control.Controllers
         {
             var result = await _service.GetByIdAsync(id);
             if (result is null)
-                return NotFound(new Response { Success = false, Message = $"Consumable with id={id} not found." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Consumable", id) });
             return Ok(result);
         }
 
@@ -41,7 +41,7 @@ namespace Control.Controllers
         {
             var result = await _service.UpdateAsync(id, dto);
             if (result is null)
-                return NotFound(new Response { Success = false, Message = $"Consumable with id={id} not found." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Consumable", id) });
             return Ok(result);
         }
 
@@ -50,8 +50,8 @@ namespace Control.Controllers
         {
             var deleted = await _service.DeleteAsync(id);
             if (!deleted)
-                return NotFound(new Response { Success = false, Message = $"Consumable with id={id} not found." });
-            return Ok(new Response { Success = true, Message = $"Consumable with id={id} deleted." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Consumable", id) });
+            return Ok(new Response { Success = true, Message = SuccessMassage.Deleted("Consumable", id) });
         }
     }
 }

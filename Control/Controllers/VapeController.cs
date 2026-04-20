@@ -25,7 +25,7 @@ namespace Control.Controllers
         {
             var result = await _service.GetByIdAsync(id);
             if (result is null)
-                return NotFound(new Response { Success = false, Message = $"Vape with id={id} not found." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Vape", id) });
             return Ok(result);
         }
 
@@ -41,7 +41,7 @@ namespace Control.Controllers
         {
             var result = await _service.UpdateAsync(id, dto);
             if (result is null)
-                return NotFound(new Response { Success = false, Message = $"Vape with id={id} not found." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Vape", id) });
             return Ok(result);
         }
 
@@ -50,8 +50,8 @@ namespace Control.Controllers
         {
             var deleted = await _service.DeleteAsync(id);
             if (!deleted)
-                return NotFound(new Response { Success = false, Message = $"Vape with id={id} not found." });
-            return Ok(new Response { Success = true, Message = $"Vape with id={id} deleted." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Vape", id) });
+            return Ok(new Response { Success = true, Message = SuccessMassage.Deleted("Vape", id) });
         }
     }
 }

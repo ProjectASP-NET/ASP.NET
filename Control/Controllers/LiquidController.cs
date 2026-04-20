@@ -26,7 +26,7 @@ namespace Control.Controllers
         {
             var result = await _service.GetByIdAsync(id);
             if (result is null)
-                return NotFound(new Response { Success = false, Message = $"Liquid with id={id} not found." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Liquid", id) });
             return Ok(result);
         }
 
@@ -42,7 +42,7 @@ namespace Control.Controllers
         {
             var result = await _service.UpdateAsync(id, dto);
             if (result is null)
-                return NotFound(new Response { Success = false, Message = $"Liquid with id={id} not found." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Liquid", id) });
             return Ok(result);
         }
 
@@ -51,8 +51,8 @@ namespace Control.Controllers
         {
             var deleted = await _service.DeleteAsync(id);
             if (!deleted)
-                return NotFound(new Response { Success = false, Message = $"Liquid with id={id} not found." });
-            return Ok(new Response { Success = true, Message = $"Liquid with id={id} deleted." });
+                return NotFound(new Response { Success = false, Message = ErrorMassage.NotFound("Liquid", id) });
+            return Ok(new Response { Success = true, Message = SuccessMassage.Deleted("Liquid", id) });
         }
     }
 }
