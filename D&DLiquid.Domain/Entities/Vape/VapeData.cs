@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using D_DStore.Domain.Entities.Product;
 
-namespace D_DStore.Domain.Entities.Product
+namespace D_DStore.Domain.Entities.Vape
 {
     public class VapeData : ProductData
 {

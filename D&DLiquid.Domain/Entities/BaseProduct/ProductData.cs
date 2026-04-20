@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using D_DStore.Domain.Entities.References;
+using D_DStore.Domain.Entities;
+
 
 namespace D_DStore.Domain.Entities.Product
 {
@@ -18,13 +20,16 @@ namespace D_DStore.Domain.Entities.Product
         [Required]
         [StringLength(50), MinLength(5)]
         public string Name { get; set; } = string.Empty;
-        public string? Brand { get; set; }
         public string? Description { get; set; }
         public decimal Price { get; set; }
-        public string Img { get; set; } = string.Empty;
         public int StockQuantity { get; set; }
         public int LikeCount { get; set; }
         public ProductStatus Status { get; set; }
         public ProductType Type { get; set; } 
+        public int? BrandId { get; set; }
+        public BrandData? Brand { get; set; }
+        public int? CategoryId { get; set; }
+        public ProductCategory? Category { get; set; }
+        public ICollection<ProductTag> Tags { get; set; } = new List<ProductTag>();
     }
 }

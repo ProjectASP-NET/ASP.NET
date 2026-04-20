@@ -5,8 +5,8 @@ using D_DStore.BusinessLogic.Interfaces;
 using D_DLiquid.DataAccess.Reps;
 using D_DLiquid.DataAccess.Interfaces;
 using D_DStore.Domain.Models.Product;
-using D_DStore.Domain.Entities.Product;
 using AutoMapper;
+using D_DStore.Domain.Entities.Liquid;
 
 namespace D_DStore.BusinessLogic.Services
 {

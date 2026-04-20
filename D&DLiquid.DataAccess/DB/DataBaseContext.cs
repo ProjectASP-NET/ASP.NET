@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using D_DStore.Domain.Entities.Product;
+using D_DStore.Domain.Entities.Consumable;
+using D_DStore.Domain.Entities.Liquid;
+using D_DStore.Domain.Entities.Vape;
 using Microsoft.EntityFrameworkCore;
 //Для себя пока оставил команды по работе с БД,по концу их не будет.
 //dotnet ef migrations add AddStockQ --startup-project ../Control

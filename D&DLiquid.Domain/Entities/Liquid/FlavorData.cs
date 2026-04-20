@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace D_DStore.Domain.Entities.Product
+namespace D_DStore.Domain.Entities.Liquid
 {
     public class FlavorData
     {
