@@ -22,6 +22,7 @@ namespace D_DStore.Domain.Entities.Product
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public string Img { get; set; } = string.Empty;
+        public int StockQuantity { get; set; }
         public int LikeCount { get; set; }
         public ProductStatus Status { get; set; }
         public ProductType Type { get; set; } 

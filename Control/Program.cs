@@ -13,7 +13,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IRepository<LiquidData>, Repository<LiquidData>>();
 builder.Services.AddScoped<IRepository<VapeData>, Repository<VapeData>>();
 builder.Services.AddScoped<IRepository<ConsumableData>, Repository<ConsumableData>>();
-builder.Services.AddScoped<ILiquidService, LiquidService>();
+builder.Services.AddScoped<ILiquidService, LiquidServices>();
+builder.Services.AddScoped<IVapeService, VapeServices>();
+builder.Services.AddScoped<IConsumableService, ConsumableServices>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
