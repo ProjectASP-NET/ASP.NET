@@ -13,14 +13,14 @@ using D_DStore.Domain.Enums;
 using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Entities.References;
 //Для себя пока оставил команды по работе с БД,по концу их не будет.
-//dotnet ef migrations add AddStockQ --startup-project ../Control
+//dotnet ef migrations add Relations --startup-project ../Control
 //dotnet ef database update --startup-project ../Control
 namespace D_DStore.DataAccess.DB
     {
         public class AppDbContext : DbContext
         {
             public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
+            public DbSet<ProductData> Products { get; set; }
             public DbSet<LiquidData> Liquids { get; set; }
             public DbSet<VapeData> Vapes { get; set; }
             public DbSet<ConsumableData> Consumables { get; set; }
