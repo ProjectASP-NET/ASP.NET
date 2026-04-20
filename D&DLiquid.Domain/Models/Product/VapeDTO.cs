@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace D_DStore.Domain.Models.Product
 {
-    public class VapeDTO : ProductDataDTO
+    public class VapeDTO : ProductDTO
     {
         public int BatteryCapacity { get; set; }
         public int MaxPower { get; set; }

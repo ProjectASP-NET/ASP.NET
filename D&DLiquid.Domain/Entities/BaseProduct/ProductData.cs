@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using D_DStore.Domain.Entities.References;
 using D_DStore.Domain.Entities;
+using D_DStore.Domain.Entities.BaseProduct.Brand;
 
 
 namespace D_DStore.Domain.Entities.Product

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace D_DStore.Domain.Models.Product
 {
-    public class ConsumableDTO : ProductDataDTO
+    public class ConsumableDTO : ProductDTO
     {
     }
 }

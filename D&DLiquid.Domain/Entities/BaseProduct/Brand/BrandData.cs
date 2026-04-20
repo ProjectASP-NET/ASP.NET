@@ -1,9 +1,10 @@
-﻿using System;
+﻿using D_DStore.Domain.Entities.Product;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Text;
 
-namespace D_DStore.Domain.Entities.Product
+namespace D_DStore.Domain.Entities.BaseProduct.Brand
 {
     public class BrandData
     {

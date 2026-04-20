@@ -14,15 +14,15 @@ namespace D_DStore.BusinessLogic.Mapping
     {
                 public MapperProfile()
         {
-            CreateMap<ProductData, ProductDataDTO>().ReverseMap();
+            CreateMap<ProductData, ProductDTO>().ReverseMap();
             CreateMap<LiquidData, LiquidDTO>()
-                .IncludeBase<ProductData, ProductDataDTO>()
+                .IncludeBase<ProductData, ProductDTO>()
                 .ReverseMap();
             CreateMap<VapeData, VapeDTO>()
-               .IncludeBase<ProductData, ProductDataDTO>()
+               .IncludeBase<ProductData, ProductDTO>()
                .ReverseMap();
             CreateMap<ConsumableData, ConsumableDTO>()
-               .IncludeBase<ProductData, ProductDataDTO>()
+               .IncludeBase<ProductData, ProductDTO>()
                .ReverseMap();
         }
     }
