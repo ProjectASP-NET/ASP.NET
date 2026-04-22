@@ -39,6 +39,7 @@ namespace D_DStore.DataAccess.DB
                     .WithMany(p => p.Images)
                     .HasForeignKey(pi => pi.ProductId)
                     .OnDelete(DeleteBehavior.Cascade);
+
                 modelBuilder.Entity<LiquidData>()
                     .HasMany(l => l.Flavors)
                     .WithMany(f => f.Liquids)

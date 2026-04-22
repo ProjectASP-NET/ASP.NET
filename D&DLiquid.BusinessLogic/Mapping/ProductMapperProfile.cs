@@ -10,9 +10,9 @@ using D_DStore.Domain.Models.Product;
 
 namespace D_DStore.BusinessLogic.Mapping
 {
-    public class MapperProfile : Profile
+    public class ProductMapperProfile : Profile
     {
-                public MapperProfile()
+                public ProductMapperProfile()
         {
             CreateMap<ProductData, ProductDTO>().ReverseMap();
             CreateMap<LiquidData, LiquidDTO>()
@@ -24,6 +24,7 @@ namespace D_DStore.BusinessLogic.Mapping
             CreateMap<ConsumableData, ConsumableDTO>()
                .IncludeBase<ProductData, ProductDTO>()
                .ReverseMap();
+            CreateMap<FlavorData, FlavorDTO>().ReverseMap();
         }
     }
 }

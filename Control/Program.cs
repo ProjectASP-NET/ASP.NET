@@ -21,7 +21,7 @@ builder.Services.AddScoped<IConsumableService, ConsumableServices>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(cfg => { },typeof(MapperProfile));
+builder.Services.AddAutoMapper(cfg => { },typeof(ProductMapperProfile));
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
