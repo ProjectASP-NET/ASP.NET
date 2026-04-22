@@ -9,44 +9,10 @@ using D_DStore.Domain.Models.Product;
 
 namespace D_DStore.BusinessLogic.Services.BaseProduct
 {
-    public class ConsumableServices : IConsumableService
+    public class ConsumableServices : BaseService<ConsumableData, ConsumableDTO>, IConsumableService
     {
-        private readonly IRepository<ConsumableData> _repo;
-        private readonly IMapper _mapper;
-
-        public ConsumableServices(IRepository<ConsumableData> repo, IMapper mapper)
-        {
-            _repo = repo;
-            _mapper = mapper;
-        }
-
-        public async Task<IEnumerable<ConsumableDTO>> GetAllAsync()
-        {
-            var entities = await _repo.GetAllAsync();
-            return _mapper.Map<IEnumerable<ConsumableDTO>>(entities);
-        }
-
-        public async Task<ConsumableDTO?> GetByIdAsync(int id)
-        {
-            var entity = await _repo.GetByIdAsync(id);
-            return entity is null ? null : _mapper.Map<ConsumableDTO>(entity);
-        }
-
-        public async Task<ConsumableDTO> CreateAsync(ConsumableDTO dto)
-        {
-            var entity = _mapper.Map<ConsumableData>(dto);
-            var created = await _repo.CreateAsync(entity);
-            return _mapper.Map<ConsumableDTO>(created);
-        }
-
-        public async Task<ConsumableDTO?> UpdateAsync(int id, ConsumableDTO dto)
-        {
-            var entity = _mapper.Map<ConsumableData>(dto);
-            var updated = await _repo.UpdateAsync(id, entity);
-            return updated is null ? null : _mapper.Map<ConsumableDTO>(updated);
-        }
-
-        public async Task<bool> DeleteAsync(int id)
-            => await _repo.DeleteAsync(id);
+        public ConsumableServices(IRepository<ConsumableData> repo, IMapper mapper) : base(repo, mapper) { }
+        
     }
+
 }
