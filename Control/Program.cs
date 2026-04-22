@@ -8,20 +8,27 @@ using D_DStore.Domain.Entities.Liquid;
 using D_DStore.Domain.Entities.Consumable;
 using D_DStore.BusinessLogic.Services.BaseProduct;
 using D_DStore.BusinessLogic.Interfaces.Product;
+using D_DStore.BusinessLogic.Services.Product;
+using D_DStore.BusinessLogic.Interfaces.Product.Brand;
+using D_DStore.BusinessLogic.Services.Product.Brand;
 var builder = WebApplication.CreateBuilder(args);
 var DBconnection = builder.Configuration.GetConnectionString("DBconnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(DBconnection));
-builder.Services.AddScoped<IRepository<LiquidData>, Repository<LiquidData>>();
-builder.Services.AddScoped<IRepository<VapeData>, Repository<VapeData>>();
-builder.Services.AddScoped<IRepository<ConsumableData>, Repository<ConsumableData>>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ILiquidService, LiquidServices>();
 builder.Services.AddScoped<IVapeService, VapeServices>();
 builder.Services.AddScoped<IConsumableService, ConsumableServices>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<IFlavorService, FlavorService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(cfg => { },typeof(ProductMapperProfile));
+builder.Services.AddAutoMapper(cfg => { },typeof(ProductMapperProfile).Assembly);
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

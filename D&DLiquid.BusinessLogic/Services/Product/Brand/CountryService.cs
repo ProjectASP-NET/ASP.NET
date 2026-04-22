@@ -9,8 +9,8 @@ using System.Text;
 
 namespace D_DStore.BusinessLogic.Services.Product.Brand
 {
-    public class CountyService : BaseService<CountryData,CountryDTO> , ICountryService
+    public class CountryService : BaseService<CountryData,CountryDTO> , ICountryService
     {
-        public CountyService(IRepository<CountryData> repo, IMapper mapper) : base(repo, mapper) { }
+        public CountryService(IRepository<CountryData> repo, IMapper mapper) : base(repo, mapper) { }
     }
 }
