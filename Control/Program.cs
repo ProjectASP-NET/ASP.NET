@@ -1,13 +1,13 @@
 using D_DLiquid.DataAccess.Interfaces;
 using D_DLiquid.DataAccess.Reps;
-using D_DStore.BusinessLogic.Interfaces;
-using D_DStore.BusinessLogic.Services;
 using D_DStore.DataAccess.DB;
 using Microsoft.EntityFrameworkCore;
 using D_DStore.BusinessLogic.Mapping;
 using D_DStore.Domain.Entities.Vape;
 using D_DStore.Domain.Entities.Liquid;
 using D_DStore.Domain.Entities.Consumable;
+using D_DStore.BusinessLogic.Services.BaseProduct;
+using D_DStore.BusinessLogic.Interfaces.Product;
 var builder = WebApplication.CreateBuilder(args);
 var DBconnection = builder.Configuration.GetConnectionString("DBconnection");
 builder.Services.AddDbContext<AppDbContext>(options =>

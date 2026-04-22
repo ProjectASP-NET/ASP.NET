@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using D_DStore.BusinessLogic.Interfaces;
 using D_DStore.Domain.Models.BaseActions;
 using D_DStore.Domain.Models.Product;
+using D_DStore.BusinessLogic.Interfaces.Product;
 
 namespace Control.Controllers
 {
