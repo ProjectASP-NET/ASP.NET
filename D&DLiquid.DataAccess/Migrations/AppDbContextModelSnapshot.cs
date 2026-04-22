@@ -71,6 +71,34 @@ namespace D_DStore.DataAccess.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("D_DStore.Domain.Entities.BaseProduct.ProductImageData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+                });
+
             modelBuilder.Entity("D_DStore.Domain.Entities.Liquid.FlavorData", b =>
                 {
                     b.Property<int>("Id")
@@ -108,11 +136,6 @@ namespace D_DStore.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("character varying(21)");
-
                     b.Property<int>("LikeCount")
                         .HasColumnType("integer");
 
@@ -144,9 +167,7 @@ namespace D_DStore.DataAccess.Migrations
 
                     b.ToTable("Products");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("ProductData");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("D_DStore.Domain.Enums.ProductCategory", b =>
@@ -223,7 +244,7 @@ namespace D_DStore.DataAccess.Migrations
                 {
                     b.HasBaseType("D_DStore.Domain.Entities.Product.ProductData");
 
-                    b.HasDiscriminator().HasValue("ConsumableData");
+                    b.ToTable("Consumables", (string)null);
                 });
 
             modelBuilder.Entity("D_DStore.Domain.Entities.Liquid.LiquidData", b =>
@@ -239,7 +260,7 @@ namespace D_DStore.DataAccess.Migrations
                     b.Property<int>("Volume")
                         .HasColumnType("integer");
 
-                    b.HasDiscriminator().HasValue("LiquidData");
+                    b.ToTable("Liquids", (string)null);
                 });
 
             modelBuilder.Entity("D_DStore.Domain.Entities.Vape.VapeData", b =>
@@ -262,7 +283,7 @@ namespace D_DStore.DataAccess.Migrations
                     b.Property<decimal>("TankCapacity")
                         .HasColumnType("numeric");
 
-                    b.HasDiscriminator().HasValue("VapeData");
+                    b.ToTable("Vapes", (string)null);
                 });
 
             modelBuilder.Entity("D_DStore.Domain.Entities.BaseProduct.Brand.BrandData", b =>
@@ -273,6 +294,17 @@ namespace D_DStore.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("D_DStore.Domain.Entities.BaseProduct.ProductImageData", b =>
+                {
+                    b.HasOne("D_DStore.Domain.Entities.Product.ProductData", "Product")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("D_DStore.Domain.Entities.Product.ProductData", b =>
@@ -322,6 +354,33 @@ namespace D_DStore.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("D_DStore.Domain.Entities.Consumable.ConsumableData", b =>
+                {
+                    b.HasOne("D_DStore.Domain.Entities.Product.ProductData", null)
+                        .WithOne()
+                        .HasForeignKey("D_DStore.Domain.Entities.Consumable.ConsumableData", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("D_DStore.Domain.Entities.Liquid.LiquidData", b =>
+                {
+                    b.HasOne("D_DStore.Domain.Entities.Product.ProductData", null)
+                        .WithOne()
+                        .HasForeignKey("D_DStore.Domain.Entities.Liquid.LiquidData", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("D_DStore.Domain.Entities.Vape.VapeData", b =>
+                {
+                    b.HasOne("D_DStore.Domain.Entities.Product.ProductData", null)
+                        .WithOne()
+                        .HasForeignKey("D_DStore.Domain.Entities.Vape.VapeData", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("D_DStore.Domain.Entities.BaseProduct.Brand.BrandData", b =>
                 {
                     b.Navigation("Products");
@@ -330,6 +389,11 @@ namespace D_DStore.DataAccess.Migrations
             modelBuilder.Entity("D_DStore.Domain.Entities.BaseProduct.Brand.CountryData", b =>
                 {
                     b.Navigation("Brands");
+                });
+
+            modelBuilder.Entity("D_DStore.Domain.Entities.Product.ProductData", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("D_DStore.Domain.Enums.ProductCategory", b =>

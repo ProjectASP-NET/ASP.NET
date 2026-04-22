@@ -34,7 +34,11 @@ namespace D_DStore.DataAccess.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<ProductImageData>()
+            modelBuilder.Entity<LiquidData>().ToTable("Liquids");
+            modelBuilder.Entity<VapeData>().ToTable("Vapes");
+            modelBuilder.Entity<ConsumableData>().ToTable("Consumables");
+
+            modelBuilder.Entity<ProductImageData>()
                     .HasOne(pi => pi.Product)
                     .WithMany(p => p.Images)
                     .HasForeignKey(pi => pi.ProductId)

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace D_DStore.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class NewDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,15 +104,6 @@ namespace D_DStore.DataAccess.Migrations
                     Type = table.Column<int>(type: "integer", nullable: false),
                     BrandId = table.Column<int>(type: "integer", nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: true),
-                    Discriminator = table.Column<string>(type: "character varying(21)", maxLength: 21, nullable: false),
-                    Volume = table.Column<int>(type: "integer", nullable: true),
-                    Nicotine = table.Column<int>(type: "integer", nullable: true),
-                    IceLevel = table.Column<int>(type: "integer", nullable: true),
-                    BatteryCapacity = table.Column<int>(type: "integer", nullable: true),
-                    MaxPower = table.Column<int>(type: "integer", nullable: true),
-                    Color = table.Column<string>(type: "text", nullable: true),
-                    TankCapacity = table.Column<decimal>(type: "numeric", nullable: true),
-                    CoilResistance = table.Column<decimal>(type: "numeric", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -134,24 +125,59 @@ namespace D_DStore.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LiquidFlavors",
+                name: "Consumables",
                 columns: table => new
                 {
-                    FlavorsId = table.Column<int>(type: "integer", nullable: false),
-                    LiquidsId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LiquidFlavors", x => new { x.FlavorsId, x.LiquidsId });
+                    table.PrimaryKey("PK_Consumables", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LiquidFlavors_Flavors_FlavorsId",
-                        column: x => x.FlavorsId,
-                        principalTable: "Flavors",
+                        name: "FK_Consumables_Products_Id",
+                        column: x => x.Id,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Liquids",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Volume = table.Column<int>(type: "integer", nullable: false),
+                    Nicotine = table.Column<int>(type: "integer", nullable: false),
+                    IceLevel = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Liquids", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LiquidFlavors_Products_LiquidsId",
-                        column: x => x.LiquidsId,
+                        name: "FK_Liquids_Products_Id",
+                        column: x => x.Id,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Url = table.Column<string>(type: "text", nullable: false),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
+                    SortOrder = table.Column<int>(type: "integer", nullable: false),
+                    ProductId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductImages_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -181,6 +207,52 @@ namespace D_DStore.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Vapes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    BatteryCapacity = table.Column<int>(type: "integer", nullable: false),
+                    MaxPower = table.Column<int>(type: "integer", nullable: false),
+                    Color = table.Column<string>(type: "text", nullable: false),
+                    TankCapacity = table.Column<decimal>(type: "numeric", nullable: false),
+                    CoilResistance = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vapes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vapes_Products_Id",
+                        column: x => x.Id,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LiquidFlavors",
+                columns: table => new
+                {
+                    FlavorsId = table.Column<int>(type: "integer", nullable: false),
+                    LiquidsId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LiquidFlavors", x => new { x.FlavorsId, x.LiquidsId });
+                    table.ForeignKey(
+                        name: "FK_LiquidFlavors_Flavors_FlavorsId",
+                        column: x => x.FlavorsId,
+                        principalTable: "Flavors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LiquidFlavors_Liquids_LiquidsId",
+                        column: x => x.LiquidsId,
+                        principalTable: "Liquids",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Brands_CountryId",
                 table: "Brands",
@@ -190,6 +262,11 @@ namespace D_DStore.DataAccess.Migrations
                 name: "IX_LiquidFlavors_LiquidsId",
                 table: "LiquidFlavors",
                 column: "LiquidsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductImages_ProductId",
+                table: "ProductImages",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
@@ -211,19 +288,31 @@ namespace D_DStore.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Consumables");
+
+            migrationBuilder.DropTable(
                 name: "LiquidFlavors");
+
+            migrationBuilder.DropTable(
+                name: "ProductImages");
 
             migrationBuilder.DropTable(
                 name: "ProductTags");
 
             migrationBuilder.DropTable(
+                name: "Vapes");
+
+            migrationBuilder.DropTable(
                 name: "Flavors");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Liquids");
 
             migrationBuilder.DropTable(
                 name: "Tags");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Brands");
