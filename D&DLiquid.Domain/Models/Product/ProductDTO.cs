@@ -13,7 +13,6 @@ namespace D_DStore.Domain.Models.Product
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public string Img { get; set; } = string.Empty;
         public ProductStatus Status { get; set; }
         public ProductType Type { get; set; }
         public decimal Price { get; set; }
@@ -21,5 +20,6 @@ namespace D_DStore.Domain.Models.Product
         public BrandDTO? Brand { get; set; }
         public CategoryDTO? Category { get; set; }
         public ICollection<TagDTO> Tags { get; set; } = new List<TagDTO>();
+        public ICollection<ProductImageDTO> Images { get; set; } = new List<ProductImageDTO>();
     }
 }

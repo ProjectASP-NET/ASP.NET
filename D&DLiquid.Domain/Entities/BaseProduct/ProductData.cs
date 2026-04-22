@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using D_DStore.Domain.Entities.References;
 using D_DStore.Domain.Entities;
 using D_DStore.Domain.Entities.BaseProduct.Brand;
+using D_DStore.Domain.Entities.BaseProduct;
 
 
 namespace D_DStore.Domain.Entities.Product
@@ -32,5 +33,6 @@ namespace D_DStore.Domain.Entities.Product
         public int? CategoryId { get; set; }
         public ProductCategory? Category { get; set; }
         public ICollection<ProductTag> Tags { get; set; } = new List<ProductTag>();
+        public ICollection<ProductImageData> Images { get; set; } = new List<ProductImageData>();
     }
 }

@@ -12,6 +12,7 @@ using D_DStore.Domain.Entities.BaseProduct.Brand;
 using D_DStore.Domain.Enums;
 using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Entities.References;
+using D_DStore.Domain.Entities.BaseProduct;
 //Для себя пока оставил команды по работе с БД,по концу их не будет.
 //dotnet ef migrations add Relations --startup-project ../Control
 //dotnet ef database update --startup-project ../Control
@@ -29,9 +30,15 @@ namespace D_DStore.DataAccess.DB
             public DbSet<ProductCategory> Categories { get; set; }
             public DbSet<ProductTag> Tags { get; set; }
             public DbSet<CountryData> Countries { get; set; }
+            public DbSet<ProductImageData> ProductImages { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
+                modelBuilder.Entity<ProductImageData>()
+                    .HasOne(pi => pi.Product)
+                    .WithMany(p => p.Images)
+                    .HasForeignKey(pi => pi.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
                 modelBuilder.Entity<LiquidData>()
                     .HasMany(l => l.Flavors)
                     .WithMany(f => f.Liquids)
