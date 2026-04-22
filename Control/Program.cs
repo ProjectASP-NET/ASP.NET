@@ -25,6 +25,7 @@ builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IFlavorService, FlavorService>();
+builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();

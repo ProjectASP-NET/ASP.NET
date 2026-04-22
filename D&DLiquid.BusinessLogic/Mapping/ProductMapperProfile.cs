@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using D_DStore.Domain.Entities.BaseProduct;
 using D_DStore.Domain.Entities.Consumable;
 using D_DStore.Domain.Entities.Liquid;
 using D_DStore.Domain.Entities.Product;
@@ -25,6 +26,7 @@ namespace D_DStore.BusinessLogic.Mapping
                .IncludeBase<ProductData, ProductDTO>()
                .ReverseMap();
             CreateMap<FlavorData, FlavorDTO>().ReverseMap();
+            CreateMap<ProductImageData, ProductImageDTO>().ReverseMap();
         }
     }
 }
