@@ -4,7 +4,7 @@ using System.Text;
 
 namespace D_DStore.Domain.Models.BaseActions
 {
-    public class ErrorMassage
+    public class ErrorMessage
     {
         public static string NotFound(string entity, int id) => $"{entity} with id={id} not found.";
     }

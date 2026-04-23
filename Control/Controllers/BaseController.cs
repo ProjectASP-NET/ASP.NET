@@ -28,11 +28,11 @@ namespace Control.Controllers
         {
             var result = await _service.GetByIdAsync(id);
             if (result is null)
-                return NotFound(new Response<TDTO> { Success = false, Message = ErrorMassage.NotFound(_entityName, id) });
+                return NotFound(new Response<TDTO> { Success = false, Message = ErrorMessage.NotFound(_entityName, id) });
             return Ok(new Response<TDTO> { 
                 Success = true, 
                 Data = result,
-                Message = SuccessMassage.GetById(_entityName, id)
+                Message = SuccessMessage.GetById(_entityName, id)
             });
         }
 
@@ -48,9 +48,9 @@ namespace Control.Controllers
         {
             var result = await _service.UpdateAsync(id, dto);
             if (result is null)
-                return NotFound(new Response<TDTO> { Success = false, Message = ErrorMassage.NotFound(_entityName, id) });
+                return NotFound(new Response<TDTO> { Success = false, Message = ErrorMessage.NotFound(_entityName, id) });
             return Ok(
-           new Response<TDTO> { Success = true , Message = SuccessMassage.Edited(_entityName, id)});
+           new Response<TDTO> { Success = true , Message = SuccessMessage.Edited(_entityName, id)});
         }
 
         [HttpDelete("{id}")]
@@ -58,8 +58,8 @@ namespace Control.Controllers
         {
             var deleted = await _service.DeleteAsync(id);
             if (!deleted)
-                return NotFound(new Response<TDTO> { Success = false, Message = ErrorMassage.NotFound(_entityName, id) });
-            return Ok(new Response<TDTO> { Success = true, Message = SuccessMassage.Deleted(_entityName, id) });
+                return NotFound(new Response<TDTO> { Success = false, Message = ErrorMessage.NotFound(_entityName, id) });
+            return Ok(new Response<TDTO> { Success = true, Message = SuccessMessage.Deleted(_entityName, id) });
         }
     }
 }

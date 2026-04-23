@@ -15,6 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 var DBconnection = builder.Configuration.GetConnectionString("DBconnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(DBconnection));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowNextJs", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ILiquidService, LiquidServices>();
@@ -31,6 +41,7 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(cfg => { },typeof(ProductMapperProfile).Assembly);
 var app = builder.Build();
+app.UseCors("AllowNextJs");
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace D_DStore.Domain.Models.BaseActions
 {
-    public class SuccessMassage
+    public class SuccessMessage
     {
         public static string Deleted(string entity, int id) => $"{entity} with id={id} deleted.";
         public static string Created(string entity, int id) => $"{entity} with id ={id} created";
