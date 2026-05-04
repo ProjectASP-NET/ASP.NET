@@ -17,6 +17,7 @@ namespace D_DStore.Domain.Models.Product
         public ProductType Type { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
+        public int LikeCount { get; set; }
         public BrandDTO? Brand { get; set; }
         public CategoryDTO? Category { get; set; }
         public ICollection<TagDTO> Tags { get; set; } = new List<TagDTO>();

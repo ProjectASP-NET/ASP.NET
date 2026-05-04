@@ -11,8 +11,8 @@ namespace D_DLiquid.DataAccess.Reps
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly AppDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly AppDbContext _context;
+        protected readonly DbSet<T> _dbSet;
 
         public Repository(AppDbContext context)
         {
@@ -20,10 +20,10 @@ namespace D_DLiquid.DataAccess.Reps
             _dbSet = context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
             => await _dbSet.ToListAsync();
 
-        public async Task<T?> GetByIdAsync(int id)
+        public virtual async Task<T?> GetByIdAsync(int id)
             => await _dbSet.FindAsync(id);
 
         public async Task<T> CreateAsync(T entity)

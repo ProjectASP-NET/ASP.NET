@@ -11,6 +11,9 @@ using D_DStore.BusinessLogic.Interfaces.Product;
 using D_DStore.BusinessLogic.Services.Product;
 using D_DStore.BusinessLogic.Interfaces.Product.Brand;
 using D_DStore.BusinessLogic.Services.Product.Brand;
+using D_DStore.DataAccess.Reps;
+using D_DStore.Domain.Entities.Product;
+using D_DStore.Domain.Entities.BaseProduct.Brand;
 var builder = WebApplication.CreateBuilder(args);
 var DBconnection = builder.Configuration.GetConnectionString("DBconnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -26,6 +29,8 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IRepository<ProductData>,ProductRepository>();
+builder.Services.AddScoped<IRepository<BrandData>, BrandRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ILiquidService, LiquidServices>();
 builder.Services.AddScoped<IVapeService, VapeServices>();
