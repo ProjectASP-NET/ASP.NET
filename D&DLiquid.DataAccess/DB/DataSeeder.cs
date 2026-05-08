@@ -5,15 +5,36 @@ using D_DStore.Domain.Entities.Liquid;
 using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Entities.Vape;
 using D_DStore.Domain.Enums;
+using D_DStore.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace D_DStore.DataAccess.DB
 {
     public static class DataSeeder
     {
-        public static async Task SeedAsync(AppDbContext context)
+        public static async Task SeedAsync(AppDbContext context,UserDBContext usercontext)
         {
             await context.Database.MigrateAsync();
+            if (!usercontext.Roles.Any())
+            {
+                var roles = new List<RoleData>
+                {
+                    new RoleData { 
+                        Name = "Admin",
+                        Description = "Администратор с полными правами доступа"
+                    },
+                    new RoleData {
+                        Name = "User",
+                        Description = "Обычный пользователь с ограниченными правами доступа"
+                    },
+                    new RoleData {
+                        Name = "Manager",
+                        Description = "Менеджер с правами управления товарами и заказами"   
+                    }
+                };
+                await usercontext.Roles.AddRangeAsync(roles);
+                await usercontext.SaveChangesAsync();
+            }
             if (!await context.Countries.AnyAsync())
             {
                 context.Countries.AddRange(

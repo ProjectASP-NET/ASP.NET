@@ -16,6 +16,7 @@ namespace D_DStore.DataAccess.Reps
         {
             return await _dbSet
             .Include(p => p.Brand)
+            .ThenInclude(b => b.Country)
             .Include(p => p.Category)
             .Include(p => p.Tags)
             .Include(p => p.Images)
@@ -25,6 +26,7 @@ namespace D_DStore.DataAccess.Reps
         {
             return await _dbSet
            .Include(p => p.Brand)
+           .ThenInclude(b => b.Country)
            .Include(p => p.Category)
            .Include(p => p.Tags)
            .Include(p => p.Images)
