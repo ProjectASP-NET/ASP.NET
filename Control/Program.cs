@@ -3,9 +3,6 @@ using D_DLiquid.DataAccess.Reps;
 using D_DStore.DataAccess.DB;
 using Microsoft.EntityFrameworkCore;
 using D_DStore.BusinessLogic.Mapping;
-using D_DStore.Domain.Entities.Vape;
-using D_DStore.Domain.Entities.Liquid;
-using D_DStore.Domain.Entities.Consumable;
 using D_DStore.BusinessLogic.Services.BaseProduct;
 using D_DStore.BusinessLogic.Interfaces.Product;
 using D_DStore.BusinessLogic.Services.Product;
@@ -15,9 +12,15 @@ using D_DStore.DataAccess.Reps;
 using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Entities.BaseProduct.Brand;
 var builder = WebApplication.CreateBuilder(args);
-var DBconnection = builder.Configuration.GetConnectionString("DBconnection");
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(DBconnection));
+var productDBConnection = builder.Configuration.GetConnectionString("ProductDB");
+var userDBConnection = builder.Configuration.GetConnectionString("UserDB");
+var orderDBConnection = builder.Configuration.GetConnectionString("OrderDB");
+builder.Services.AddDbContext<ProductDbContext>(options =>
+    options.UseNpgsql(productDBConnection));
+builder.Services.AddDbContext<UserDbContext>(options =>
+    options.UseNpgsql(userDBConnection));
+builder.Services.AddDbContext<OrderDbContext>(options =>
+    options.UseNpgsql(orderDBConnection));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextJs", policy =>
@@ -54,8 +57,9 @@ if (app.Environment.IsDevelopment())
 }
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await DataSeeder.SeedAsync(db);
+    var productDb = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
+    var userDb = scope.ServiceProvider.GetRequiredService<UserDbContext>();
+    var orderDb = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
 }
 app.UseAuthorization();
 app.UseHttpsRedirection();

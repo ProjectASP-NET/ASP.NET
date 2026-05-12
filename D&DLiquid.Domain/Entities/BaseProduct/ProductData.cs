@@ -26,13 +26,11 @@ namespace D_DStore.Domain.Entities.Product
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
         public int LikeCount { get; set; }
-        public ProductStatus Status { get; set; }
-        public ProductType Type { get; set; } 
         public int? BrandId { get; set; }
         public BrandData? Brand { get; set; }
         public int? CategoryId { get; set; }
-        public ProductCategory? Category { get; set; }
-        public ICollection<ProductTag> Tags { get; set; } = new List<ProductTag>();
+        public ProductCategoryData? Category { get; set; }
+        public ICollection<ProductTagData> Tags { get; set; } = new List<ProductTagData>();
         public ICollection<ProductImageData> Images { get; set; } = new List<ProductImageData>();
     }
 }

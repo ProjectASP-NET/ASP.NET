@@ -18,17 +18,17 @@ using D_DStore.Domain.Entities.BaseProduct;
 //dotnet ef database update --startup-project ../Control
 namespace D_DStore.DataAccess.DB
     {
-        public class AppDbContext : DbContext
+        public class ProductDbContext : DbContext
         {
-            public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+            public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options) { }
             public DbSet<ProductData> Products { get; set; }
             public DbSet<LiquidData> Liquids { get; set; }
             public DbSet<VapeData> Vapes { get; set; }
             public DbSet<ConsumableData> Consumables { get; set; }
             public DbSet<FlavorData> Flavors { get; set; }
             public DbSet<BrandData> Brands { get; set; }
-            public DbSet<ProductCategory> Categories { get; set; }
-            public DbSet<ProductTag> Tags { get; set; }
+            public DbSet<ProductCategoryData> Categories { get; set; }
+            public DbSet<ProductTagData> Tags { get; set; }
             public DbSet<CountryData> Countries { get; set; }
             public DbSet<ProductImageData> ProductImages { get; set; }
 

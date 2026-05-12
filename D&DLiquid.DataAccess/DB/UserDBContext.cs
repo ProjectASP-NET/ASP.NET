@@ -1,4 +1,5 @@
-﻿using D_DStore.Domain.Entities.User;
+﻿using D_DStore.Domain.Entities.References;
+using D_DStore.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Text;
 
 namespace D_DStore.DataAccess.DB
 {
-    public partial class AppDbContext : DbContext
+    public class UserDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
         public DbSet<UserData> Users { get; set; }
         public DbSet<RoleData> Roles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,8 +25,16 @@ namespace D_DStore.DataAccess.DB
             modelBuilder.Entity<UserData>()
                 .HasIndex(u => u.NickName)
                 .IsUnique();
+        }
+            public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.Entity is Refs && e.State == EntityState.Modified);
 
+            foreach (var entry in entries)
+                ((Refs)entry.Entity).UpdatedAt = DateTime.UtcNow;
 
+            return await base.SaveChangesAsync(ct);
         }
     }
 }

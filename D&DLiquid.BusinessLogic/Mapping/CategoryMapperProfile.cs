@@ -10,7 +10,7 @@ namespace D_DStore.BusinessLogic.Mapping
     {
         public CategoryMapperProfile()
         {
-            CreateMap<ProductCategory, CategoryDTO>().ReverseMap();
+            CreateMap<ProductCategoryData, CategoryDTO>().ReverseMap();
         }
     }
 }

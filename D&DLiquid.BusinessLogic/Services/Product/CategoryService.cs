@@ -9,8 +9,8 @@ using System.Text;
 
 namespace D_DStore.BusinessLogic.Services.Product
 {
-    public class CategoryService : BaseService<ProductCategory, CategoryDTO>, ICategoryService
+    public class CategoryService : BaseService<ProductCategoryData, CategoryDTO>, ICategoryService
     {
-        public CategoryService(IRepository<ProductCategory> repo, IMapper mapper) : base(repo, mapper) { }
+        public CategoryService(IRepository<ProductCategoryData> repo, IMapper mapper) : base(repo, mapper) { }
     }
 }

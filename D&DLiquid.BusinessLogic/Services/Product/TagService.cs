@@ -9,8 +9,8 @@ using System.Text;
 
 namespace D_DStore.BusinessLogic.Services.Product
 {
-    public class TagService : BaseService<ProductTag,TagDTO> , ITagService
+    public class TagService : BaseService<ProductTagData,TagDTO> , ITagService
     {
-        public TagService(IRepository<ProductTag> repo , IMapper mapper) : base(repo , mapper) { }
+        public TagService(IRepository<ProductTagData> repo , IMapper mapper) : base(repo , mapper) { }
     }
 }

@@ -11,7 +11,7 @@ namespace D_DStore.BusinessLogic.Mapping
     public class TagMapperProfile : Profile
     {
         public TagMapperProfile() { 
-        CreateMap<ProductTag, TagDTO>().ReverseMap();
+        CreateMap<ProductTagData, TagDTO>().ReverseMap();
         }
     }
 }

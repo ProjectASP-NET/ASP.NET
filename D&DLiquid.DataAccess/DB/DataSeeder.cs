@@ -12,7 +12,7 @@ namespace D_DStore.DataAccess.DB
 {
     public static class DataSeeder
     {
-        public static async Task SeedAsync(AppDbContext context,UserDBContext usercontext)
+        public static async Task SeedAsync(AppDbContext context,UserDbContext usercontext)
         {
             await context.Database.MigrateAsync();
             if (!usercontext.Roles.Any())
@@ -63,20 +63,20 @@ namespace D_DStore.DataAccess.DB
             if (!await context.Categories.AnyAsync())
             {
                 context.Categories.AddRange(
-                    new ProductCategory { Name = "Жидкости", Description = "Жидкости для вейпа", IconUrl = "icons/liquid.png" },
-                    new ProductCategory { Name = "Девайсы", Description = "Вейпы и моды", IconUrl = "icons/vape.png" },
-                    new ProductCategory { Name = "Расходники", Description = "Испарители, хлопок и т.д.", IconUrl = "icons/consumable.png" }
+                    new ProductCategoryData { Name = "Жидкости", Description = "Жидкости для вейпа", IconUrl = "icons/liquid.png" },
+                    new ProductCategoryData { Name = "Девайсы", Description = "Вейпы и моды", IconUrl = "icons/vape.png" },
+                    new ProductCategoryData { Name = "Расходники", Description = "Испарители, хлопок и т.д.", IconUrl = "icons/consumable.png" }
                 );
                 await context.SaveChangesAsync();
             }
             if (!await context.Tags.AnyAsync())
             {
                 context.Tags.AddRange(
-                    new ProductTag { Name = "Новинка" },
-                    new ProductTag { Name = "Хит продаж" },
-                    new ProductTag { Name = "Солевой" },
-                    new ProductTag { Name = "На органике" },
-                    new ProductTag { Name = "Скидка" }
+                    new ProductTagData { Name = "Новинка" },
+                    new ProductTagData { Name = "Хит продаж" },
+                    new ProductTagData { Name = "Солевой" },
+                    new ProductTagData { Name = "На органике" },
+                    new ProductTagData { Name = "Скидка" }
                 );
                 await context.SaveChangesAsync();
             }
@@ -127,7 +127,7 @@ namespace D_DStore.DataAccess.DB
                         BrandId = elfbar.Id,
                         CategoryId = catLiquid.Id,
                         Flavors = new List<FlavorData> { fBlueberry, fIce },
-                        Tags = new List<ProductTag> { tagHit, tagSalt },
+                        Tags = new List<ProductTagData> { tagHit, tagSalt },
                         Images = new List<ProductImageData>
                         {
                             new ProductImageData { Url = "images/blueberry_ice.png", IsMain = true, SortOrder = 1 }
@@ -147,7 +147,7 @@ namespace D_DStore.DataAccess.DB
                         BrandId = nasty.Id,
                         CategoryId = catLiquid.Id,
                         Flavors = new List<FlavorData> { fMango },
-                        Tags = new List<ProductTag> { tagNew },
+                        Tags = new List<ProductTagData> { tagNew },
                         Images = new List<ProductImageData>
                         {
                             new ProductImageData { Url = "images/mango_peach.png", IsMain = true, SortOrder = 1 }
@@ -167,7 +167,7 @@ namespace D_DStore.DataAccess.DB
                         BrandId = vampire.Id,
                         CategoryId = catLiquid.Id,
                         Flavors = new List<FlavorData> { fStrawberry, fWatermelon },
-                        Tags = new List<ProductTag> { tagHit },
+                        Tags = new List<ProductTagData> { tagHit },
                         Images = new List<ProductImageData>
                         {
                             new ProductImageData { Url = "images/heisenberg.png", IsMain = true, SortOrder = 1 }
@@ -201,7 +201,7 @@ namespace D_DStore.DataAccess.DB
                         Type = ProductType.Vape,
                         BrandId = voopoo.Id,
                         CategoryId = catVape.Id,
-                        Tags = new List<ProductTag> { tagHit },
+                        Tags = new List<ProductTagData> { tagHit },
                         Images = new List<ProductImageData>
                         {
                             new ProductImageData { Url = "images/drag4.png", IsMain = true, SortOrder = 1 }
@@ -222,7 +222,7 @@ namespace D_DStore.DataAccess.DB
                         Type = ProductType.Vape,
                         BrandId = geekvape.Id,
                         CategoryId = catVape.Id,
-                        Tags = new List<ProductTag> { tagNew },
+                        Tags = new List<ProductTagData> { tagNew },
                         Images = new List<ProductImageData>
                         {
                             new ProductImageData { Url = "images/aegis2.png", IsMain = true, SortOrder = 1 }
@@ -249,7 +249,7 @@ namespace D_DStore.DataAccess.DB
                         Type = ProductType.Consumable,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
-                        Tags = new List<ProductTag> { tagNew },
+                        Tags = new List<ProductTagData> { tagNew },
                         Images = new List<ProductImageData>
                         {
                             new ProductImageData { Url = "images/coil_z02.png", IsMain = true, SortOrder = 1 }

@@ -1,10 +1,49 @@
 ﻿services:
-  db:
-    image: postgres:latest
-    container_name: DDLiquidDB
+  db-products:
+    image: postgres:16
+    container_name: DDLiquid_Products_DB
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=qwerty
-      - POSTGRES_DB=my_project_db
+      - POSTGRES_DB=product_db
     ports:
       - "5432:5432"
+    volumes:
+      - product_data:/var/lib/postgresql/data
+    networks:
+      - dotnet_network
+  db-users:
+    image: postgres:16
+    container_name: DDLiquid_Users_DB
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=users_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - users_data:/var/lib/postgresql/data
+    networks:
+      - dotnet_network
+
+  db-orders:
+    image: postgres:16
+    container_name: DDLiquid_Orders_DB
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=orders_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - orders_data:/var/lib/postgresql/data
+    networks:
+      - dotnet_network
+
+volumes:
+  product_data:
+  users_data:
+  orders_data:
+networks:
+  dotnet_network:
+    driver: bridge
