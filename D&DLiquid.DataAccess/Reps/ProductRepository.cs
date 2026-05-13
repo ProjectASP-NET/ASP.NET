@@ -9,7 +9,7 @@ using System.Text;
 
 namespace D_DStore.DataAccess.Reps
 {
-    public class ProductRepository : Repository<ProductData>, IRepository<ProductData>
+    public class ProductRepository : ProductContextRepository<ProductData>, IRepository<ProductData>
     {
         public ProductRepository(ProductDbContext context) : base(context)  { }
         public override async Task<IEnumerable<ProductData>> GetAllAsync()

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace D_DStore.DataAccess.Reps
 {
-    public class BrandRepository : Repository<BrandData>, IRepository<BrandData>
+    public class BrandRepository : ProductContextRepository<BrandData>, IRepository<BrandData>
     { 
         public BrandRepository(ProductDbContext context) : base(context) { }
 

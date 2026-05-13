@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
               .AllowCredentials();
     });
 });
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(ProductContextRepository<>));
 builder.Services.AddScoped<IRepository<ProductData>,ProductRepository>();
 builder.Services.AddScoped<IRepository<BrandData>, BrandRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();

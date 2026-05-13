@@ -3,18 +3,16 @@ using D_DStore.DataAccess.DB;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace D_DLiquid.DataAccess.Reps
+namespace D_DStore.DataAccess.Reps
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class OrderContextRepository<T> : IRepository<T> where T : class
     {
-        protected readonly ProductDbContext _context;
+        protected readonly OrderDbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public Repository(ProductDbContext context)
+        public OrderContextRepository(OrderDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();
@@ -54,3 +52,4 @@ namespace D_DLiquid.DataAccess.Reps
         }
     }
 }
+
