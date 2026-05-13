@@ -14,7 +14,6 @@ namespace D_DStore.Domain.Models.Product
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
         public OrderStatus Status { get; set; }
-        public ProductType Type { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
         public int LikeCount { get; set; }

@@ -3,7 +3,6 @@ using System;
 using D_DStore.DataAccess.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,16 +10,14 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace D_DStore.DataAccess.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    [Migration("20260422201008_NewDB")]
-    partial class NewDB
+    [DbContext(typeof(ProductDbContext))]
+    partial class ProductDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.5")
+                .HasAnnotation("ProductVersion", "10.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -150,13 +147,7 @@ namespace D_DStore.DataAccess.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
-
                     b.Property<int>("StockQuantity")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Type")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -173,7 +164,7 @@ namespace D_DStore.DataAccess.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("D_DStore.Domain.Enums.ProductCategory", b =>
+            modelBuilder.Entity("D_DStore.Domain.Enums.ProductCategoryData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,7 +187,7 @@ namespace D_DStore.DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("D_DStore.Domain.Enums.ProductTag", b =>
+            modelBuilder.Entity("D_DStore.Domain.Enums.ProductTagData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -317,7 +308,7 @@ namespace D_DStore.DataAccess.Migrations
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("D_DStore.Domain.Enums.ProductCategory", "Category")
+                    b.HasOne("D_DStore.Domain.Enums.ProductCategoryData", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -350,7 +341,7 @@ namespace D_DStore.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("D_DStore.Domain.Enums.ProductTag", null)
+                    b.HasOne("D_DStore.Domain.Enums.ProductTagData", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -399,7 +390,7 @@ namespace D_DStore.DataAccess.Migrations
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("D_DStore.Domain.Enums.ProductCategory", b =>
+            modelBuilder.Entity("D_DStore.Domain.Enums.ProductCategoryData", b =>
                 {
                     b.Navigation("Products");
                 });

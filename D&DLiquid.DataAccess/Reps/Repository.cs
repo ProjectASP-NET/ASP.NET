@@ -11,10 +11,10 @@ namespace D_DLiquid.DataAccess.Reps
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly AppDbContext _context;
+        protected readonly ProductDbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public Repository(AppDbContext context)
+        public Repository(ProductDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

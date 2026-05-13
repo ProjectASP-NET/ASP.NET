@@ -15,7 +15,7 @@ using D_DStore.Domain.Entities.References;
 using D_DStore.Domain.Entities.BaseProduct;
 //Для себя пока оставил команды по работе с БД,по концу их не будет.
 //dotnet ef migrations add Relations --startup-project ../Control
-//dotnet ef database update --startup-project ../Control
+//dotnet ef database update --context OrderDbContext --startup-project ../Control
 namespace D_DStore.DataAccess.DB
     {
         public class ProductDbContext : DbContext

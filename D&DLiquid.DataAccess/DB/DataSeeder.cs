@@ -1,4 +1,4 @@
-﻿using D_DStore.Domain.Entities.BaseProduct;
+using D_DStore.Domain.Entities.BaseProduct;
 using D_DStore.Domain.Entities.BaseProduct.Brand;
 using D_DStore.Domain.Entities.Consumable;
 using D_DStore.Domain.Entities.Liquid;
@@ -6,83 +6,140 @@ using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Entities.Vape;
 using D_DStore.Domain.Enums;
 using D_DStore.Domain.Entities.User;
+using D_DStore.Domain.Entities.Order;
+using D_DStore.Domain.Entities.Cart;
 using Microsoft.EntityFrameworkCore;
 
 namespace D_DStore.DataAccess.DB
 {
     public static class DataSeeder
     {
-        public static async Task SeedAsync(AppDbContext context,UserDbContext usercontext)
+        public static async Task SeedAsync(ProductDbContext productContext, UserDbContext userContext, OrderDbContext orderContext)
         {
-            await context.Database.MigrateAsync();
-            if (!usercontext.Roles.Any())
+            await productContext.Database.MigrateAsync();
+            await userContext.Database.MigrateAsync();
+            await orderContext.Database.MigrateAsync();
+
+            // 1. Роли
+            if (!userContext.Roles.Any())
             {
                 var roles = new List<RoleData>
                 {
-                    new RoleData { 
+                    new RoleData
+                    {
                         Name = "Admin",
                         Description = "Администратор с полными правами доступа"
                     },
-                    new RoleData {
+                    new RoleData
+                    {
                         Name = "User",
                         Description = "Обычный пользователь с ограниченными правами доступа"
                     },
-                    new RoleData {
+                    new RoleData
+                    {
                         Name = "Manager",
-                        Description = "Менеджер с правами управления товарами и заказами"   
+                        Description = "Менеджер с правами управления товарами и заказами"
                     }
                 };
-                await usercontext.Roles.AddRangeAsync(roles);
-                await usercontext.SaveChangesAsync();
+                await userContext.Roles.AddRangeAsync(roles);
+                await userContext.SaveChangesAsync();
             }
-            if (!await context.Countries.AnyAsync())
+
+            // 2. Пользователи
+            if (!userContext.Users.Any())
             {
-                context.Countries.AddRange(
+                var adminRole = await userContext.Roles.FirstAsync(r => r.Name == "Admin");
+                var userRole = await userContext.Roles.FirstAsync(r => r.Name == "User");
+
+                var users = new List<UserData>
+                {
+                    new UserData
+                    {
+                        NickName = "admin",
+                        Email = "admin@ddliquid.com",
+                        PasswordHash = "hashed_password_admin", // В реальном проекте используйте BCrypt или аналог
+                        RoleId = adminRole.Id
+                    },
+                    new UserData
+                    {
+                        NickName = "testuser",
+                        Email = "user@test.com",
+                        PasswordHash = "hashed_password_user",
+                        RoleId = userRole.Id
+                    }
+                };
+                await userContext.Users.AddRangeAsync(users);
+                await userContext.SaveChangesAsync();
+            }
+
+            // 3. Страны
+            if (!await productContext.Countries.AnyAsync())
+            {
+                var countries = new List<CountryData>
+                {
                     new CountryData { Name = "United States", Code = "US" },
                     new CountryData { Name = "United Kingdom", Code = "UK" },
                     new CountryData { Name = "China", Code = "CN" },
-                    new CountryData { Name = "France", Code = "FR" }
-                );
-                await context.SaveChangesAsync();
+                    new CountryData { Name = "France", Code = "FR" },
+                    new CountryData { Name = "Malaysia", Code = "MY" }
+                };
+                await productContext.Countries.AddRangeAsync(countries);
+                await productContext.SaveChangesAsync();
             }
-            if (!await context.Brands.AnyAsync())
-            {
-                var us = await context.Countries.FirstAsync(c => c.Code == "US");
-                var uk = await context.Countries.FirstAsync(c => c.Code == "UK");
-                var cn = await context.Countries.FirstAsync(c => c.Code == "CN");
 
-                context.Brands.AddRange(
+            // 4. Бренды
+            if (!await productContext.Brands.AnyAsync())
+            {
+                var us = await productContext.Countries.FirstAsync(c => c.Code == "US");
+                var uk = await productContext.Countries.FirstAsync(c => c.Code == "UK");
+                var cn = await productContext.Countries.FirstAsync(c => c.Code == "CN");
+                var my = await productContext.Countries.FirstAsync(c => c.Code == "MY");
+
+                var brands = new List<BrandData>
+                {
                     new BrandData { Name = "Elfbar", Description = "Популярный китайский бренд одноразок и жидкостей", CountryId = cn.Id },
-                    new BrandData { Name = "Nasty Juice", Description = "Малайзийский бренд премиум жидкостей", CountryId = us.Id },
+                    new BrandData { Name = "Nasty Juice", Description = "Малайзийский бренд премиум жидкостей", CountryId = my.Id },
                     new BrandData { Name = "Voopoo", Description = "Китайский производитель девайсов", CountryId = cn.Id },
                     new BrandData { Name = "Geekvape", Description = "Защищённые моды и атомайзеры", CountryId = cn.Id },
                     new BrandData { Name = "Vampire Vape", Description = "Британский бренд классических жидкостей", CountryId = uk.Id }
-                );
-                await context.SaveChangesAsync();
+                };
+                await productContext.Brands.AddRangeAsync(brands);
+                await productContext.SaveChangesAsync();
             }
-            if (!await context.Categories.AnyAsync())
+
+            // 5. Категории
+            if (!await productContext.Categories.AnyAsync())
             {
-                context.Categories.AddRange(
+                var categories = new List<ProductCategoryData>
+                {
                     new ProductCategoryData { Name = "Жидкости", Description = "Жидкости для вейпа", IconUrl = "icons/liquid.png" },
                     new ProductCategoryData { Name = "Девайсы", Description = "Вейпы и моды", IconUrl = "icons/vape.png" },
                     new ProductCategoryData { Name = "Расходники", Description = "Испарители, хлопок и т.д.", IconUrl = "icons/consumable.png" }
-                );
-                await context.SaveChangesAsync();
+                };
+                await productContext.Categories.AddRangeAsync(categories);
+                await productContext.SaveChangesAsync();
             }
-            if (!await context.Tags.AnyAsync())
+
+            // 6. Теги
+            if (!await productContext.Tags.AnyAsync())
             {
-                context.Tags.AddRange(
+                var tags = new List<ProductTagData>
+                {
                     new ProductTagData { Name = "Новинка" },
                     new ProductTagData { Name = "Хит продаж" },
                     new ProductTagData { Name = "Солевой" },
                     new ProductTagData { Name = "На органике" },
                     new ProductTagData { Name = "Скидка" }
-                );
-                await context.SaveChangesAsync();
+                };
+                await productContext.Tags.AddRangeAsync(tags);
+                await productContext.SaveChangesAsync();
             }
-            if (!await context.Flavors.AnyAsync())
+
+            // 7. Вкусы
+            if (!await productContext.Flavors.AnyAsync())
             {
-                context.Flavors.AddRange(
+                var flavors = new List<FlavorData>
+                {
                     new FlavorData { Name = "Mango" },
                     new FlavorData { Name = "Blueberry" },
                     new FlavorData { Name = "Ice" },
@@ -91,28 +148,33 @@ namespace D_DStore.DataAccess.DB
                     new FlavorData { Name = "Peach" },
                     new FlavorData { Name = "Grape" },
                     new FlavorData { Name = "Lemon" }
-                );
-                await context.SaveChangesAsync();
+                };
+                await productContext.Flavors.AddRangeAsync(flavors);
+                await productContext.SaveChangesAsync();
             }
-            if (!await context.Liquids.AnyAsync())
+
+            // 8. Жидкости
+            if (!await productContext.Liquids.AnyAsync())
             {
-                var elfbar = await context.Brands.FirstAsync(b => b.Name == "Elfbar");
-                var nasty = await context.Brands.FirstAsync(b => b.Name == "Nasty Juice");
-                var vampire = await context.Brands.FirstAsync(b => b.Name == "Vampire Vape");
+                var elfbar = await productContext.Brands.FirstAsync(b => b.Name == "Elfbar");
+                var nasty = await productContext.Brands.FirstAsync(b => b.Name == "Nasty Juice");
+                var vampire = await productContext.Brands.FirstAsync(b => b.Name == "Vampire Vape");
 
-                var catLiquid = await context.Categories.FirstAsync(c => c.Name == "Жидкости");
+                var catLiquid = await productContext.Categories.FirstAsync(c => c.Name == "Жидкости");
 
-                var fMango = await context.Flavors.FirstAsync(f => f.Name == "Mango");
-                var fBlueberry = await context.Flavors.FirstAsync(f => f.Name == "Blueberry");
-                var fIce = await context.Flavors.FirstAsync(f => f.Name == "Ice");
-                var fStrawberry = await context.Flavors.FirstAsync(f => f.Name == "Strawberry");
-                var fWatermelon = await context.Flavors.FirstAsync(f => f.Name == "Watermelon");
+                var fMango = await productContext.Flavors.FirstAsync(f => f.Name == "Mango");
+                var fBlueberry = await productContext.Flavors.FirstAsync(f => f.Name == "Blueberry");
+                var fIce = await productContext.Flavors.FirstAsync(f => f.Name == "Ice");
+                var fStrawberry = await productContext.Flavors.FirstAsync(f => f.Name == "Strawberry");
+                var fWatermelon = await productContext.Flavors.FirstAsync(f => f.Name == "Watermelon");
+                var fPeach = await productContext.Flavors.FirstAsync(f => f.Name == "Peach");
 
-                var tagHit = await context.Tags.FirstAsync(t => t.Name == "Хит продаж");
-                var tagSalt = await context.Tags.FirstAsync(t => t.Name == "Солевой");
-                var tagNew = await context.Tags.FirstAsync(t => t.Name == "Новинка");
+                var tagHit = await productContext.Tags.FirstAsync(t => t.Name == "Хит продаж");
+                var tagSalt = await productContext.Tags.FirstAsync(t => t.Name == "Солевой");
+                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
 
-                context.Liquids.AddRange(
+                var liquids = new List<LiquidData>
+                {
                     new LiquidData
                     {
                         Name = "Blueberry Ice",
@@ -122,8 +184,6 @@ namespace D_DStore.DataAccess.DB
                         Volume = 30,
                         Nicotine = 20,
                         IceLevel = 3,
-                        Status = ProductStatus.Available,
-                        Type = ProductType.Liquid,
                         BrandId = elfbar.Id,
                         CategoryId = catLiquid.Id,
                         Flavors = new List<FlavorData> { fBlueberry, fIce },
@@ -142,11 +202,9 @@ namespace D_DStore.DataAccess.DB
                         Volume = 60,
                         Nicotine = 3,
                         IceLevel = 0,
-                        Status = ProductStatus.Available,
-                        Type = ProductType.Liquid,
                         BrandId = nasty.Id,
                         CategoryId = catLiquid.Id,
-                        Flavors = new List<FlavorData> { fMango },
+                        Flavors = new List<FlavorData> { fMango, fPeach },
                         Tags = new List<ProductTagData> { tagNew },
                         Images = new List<ProductImageData>
                         {
@@ -162,8 +220,6 @@ namespace D_DStore.DataAccess.DB
                         Volume = 50,
                         Nicotine = 6,
                         IceLevel = 2,
-                        Status = ProductStatus.Available,
-                        Type = ProductType.Liquid,
                         BrandId = vampire.Id,
                         CategoryId = catLiquid.Id,
                         Flavors = new List<FlavorData> { fStrawberry, fWatermelon },
@@ -173,19 +229,22 @@ namespace D_DStore.DataAccess.DB
                             new ProductImageData { Url = "images/heisenberg.png", IsMain = true, SortOrder = 1 }
                         }
                     }
-                );
-                await context.SaveChangesAsync();
+                };
+                await productContext.Liquids.AddRangeAsync(liquids);
+                await productContext.SaveChangesAsync();
             }
 
-            if (!await context.Vapes.AnyAsync())
+            // 9. Вейпы
+            if (!await productContext.Vapes.AnyAsync())
             {
-                var voopoo = await context.Brands.FirstAsync(b => b.Name == "Voopoo");
-                var geekvape = await context.Brands.FirstAsync(b => b.Name == "Geekvape");
-                var catVape = await context.Categories.FirstAsync(c => c.Name == "Девайсы");
-                var tagNew = await context.Tags.FirstAsync(t => t.Name == "Новинка");
-                var tagHit = await context.Tags.FirstAsync(t => t.Name == "Хит продаж");
+                var voopoo = await productContext.Brands.FirstAsync(b => b.Name == "Voopoo");
+                var geekvape = await productContext.Brands.FirstAsync(b => b.Name == "Geekvape");
+                var catVape = await productContext.Categories.FirstAsync(c => c.Name == "Девайсы");
+                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
+                var tagHit = await productContext.Tags.FirstAsync(t => t.Name == "Хит продаж");
 
-                context.Vapes.AddRange(
+                var vapes = new List<VapeData>
+                {
                     new VapeData
                     {
                         Name = "Drag 4",
@@ -197,8 +256,6 @@ namespace D_DStore.DataAccess.DB
                         Color = "Silver",
                         TankCapacity = 5.0m,
                         CoilResistance = 0.15m,
-                        Status = ProductStatus.Available,
-                        Type = ProductType.Vape,
                         BrandId = voopoo.Id,
                         CategoryId = catVape.Id,
                         Tags = new List<ProductTagData> { tagHit },
@@ -218,8 +275,6 @@ namespace D_DStore.DataAccess.DB
                         Color = "Black",
                         TankCapacity = 5.5m,
                         CoilResistance = 0.2m,
-                        Status = ProductStatus.Available,
-                        Type = ProductType.Vape,
                         BrandId = geekvape.Id,
                         CategoryId = catVape.Id,
                         Tags = new List<ProductTagData> { tagNew },
@@ -228,25 +283,26 @@ namespace D_DStore.DataAccess.DB
                             new ProductImageData { Url = "images/aegis2.png", IsMain = true, SortOrder = 1 }
                         }
                     }
-                );
-                await context.SaveChangesAsync();
+                };
+                await productContext.Vapes.AddRangeAsync(vapes);
+                await productContext.SaveChangesAsync();
             }
 
-            if (!await context.Consumables.AnyAsync())
+            // 10. Расходники
+            if (!await productContext.Consumables.AnyAsync())
             {
-                var geekvape = await context.Brands.FirstAsync(b => b.Name == "Geekvape");
-                var catCons = await context.Categories.FirstAsync(c => c.Name == "Расходники");
-                var tagNew = await context.Tags.FirstAsync(t => t.Name == "Новинка");
+                var geekvape = await productContext.Brands.FirstAsync(b => b.Name == "Geekvape");
+                var catCons = await productContext.Categories.FirstAsync(c => c.Name == "Расходники");
+                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
 
-                context.Consumables.AddRange(
+                var consumables = new List<ConsumableData>
+                {
                     new ConsumableData
                     {
                         Name = "Coil Geekvape Z 0.2",
                         Description = "Испаритель 0.2 Ом для серии Aegis",
                         Price = 4.99m,
                         StockQuantity = 100,
-                        Status = ProductStatus.Available,
-                        Type = ProductType.Consumable,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
                         Tags = new List<ProductTagData> { tagNew },
@@ -261,8 +317,6 @@ namespace D_DStore.DataAccess.DB
                         Description = "Органический хлопок для намоток",
                         Price = 6.49m,
                         StockQuantity = 60,
-                        Status = ProductStatus.Available,
-                        Type = ProductType.Consumable,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
@@ -270,8 +324,65 @@ namespace D_DStore.DataAccess.DB
                             new ProductImageData { Url = "images/cotton_bacon.png", IsMain = true, SortOrder = 1 }
                         }
                     }
-                );
-                await context.SaveChangesAsync();
+                };
+                await productContext.Consumables.AddRangeAsync(consumables);
+                await productContext.SaveChangesAsync();
+            }
+
+            // 11. Корзины (пустые для пользователей)
+            if (!orderContext.Cart.Any())
+            {
+                var users = userContext.Users.ToList();
+                var carts = new List<CartData>();
+
+                foreach (var user in users)
+                {
+                    carts.Add(new CartData
+                    {
+                        UserId = user.Id
+                    });
+                }
+
+                await orderContext.Cart.AddRangeAsync(carts);
+                await orderContext.SaveChangesAsync();
+            }
+
+            // 12. Тестовый заказ
+            if (!orderContext.Orders.Any())
+            {
+                var testUser = userContext.Users.FirstOrDefault(u => u.NickName == "testuser");
+                if (testUser != null)
+                {
+                    var products = productContext.Products.Take(2).ToList();
+
+                    var order = new OrderData
+                    {
+                        UserId = testUser.Id,
+                        OrderNumber = $"ORD-{DateTime.UtcNow:yyyyMMdd}-0001",
+                        Status = OrderStatus.Pending,
+                        TotalAmount = 0,
+                        DeliveryAddress = "г. Москва, ул. Тестовая, д. 1",
+                        Comment = "Тестовый заказ",
+                        Items = new List<OrderItemData>()
+                    };
+
+                    decimal total = 0;
+                    foreach (var product in products)
+                    {
+                        var orderItem = new OrderItemData
+                        {
+                            ProductId = product.Id,
+                            Quantity = 1,
+                            Price = product.Price
+                        };
+                        order.Items.Add(orderItem);
+                        total += product.Price;
+                    }
+
+                    order.TotalAmount = total;
+                    await orderContext.Orders.AddAsync(order);
+                    await orderContext.SaveChangesAsync();
+                }
             }
         }
     }

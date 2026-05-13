@@ -11,7 +11,7 @@ namespace D_DStore.DataAccess.Reps
 {
     public class ProductRepository : Repository<ProductData>, IRepository<ProductData>
     {
-        public ProductRepository(AppDbContext context) : base(context)  { }
+        public ProductRepository(ProductDbContext context) : base(context)  { }
         public override async Task<IEnumerable<ProductData>> GetAllAsync()
         {
             return await _dbSet

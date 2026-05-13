@@ -12,15 +12,13 @@ using D_DStore.DataAccess.Reps;
 using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Entities.BaseProduct.Brand;
 var builder = WebApplication.CreateBuilder(args);
-var productDBConnection = builder.Configuration.GetConnectionString("ProductDB");
-var userDBConnection = builder.Configuration.GetConnectionString("UserDB");
-var orderDBConnection = builder.Configuration.GetConnectionString("OrderDB");
+var DbConnection = builder.Configuration.GetConnectionString("D_DLiquidDB");
 builder.Services.AddDbContext<ProductDbContext>(options =>
-    options.UseNpgsql(productDBConnection));
+    options.UseNpgsql(DbConnection));
 builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseNpgsql(userDBConnection));
+    options.UseNpgsql(DbConnection));
 builder.Services.AddDbContext<OrderDbContext>(options =>
-    options.UseNpgsql(orderDBConnection));
+    options.UseNpgsql(DbConnection));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextJs", policy =>
@@ -60,6 +58,8 @@ using (var scope = app.Services.CreateScope())
     var productDb = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
     var userDb = scope.ServiceProvider.GetRequiredService<UserDbContext>();
     var orderDb = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+
+    await DataSeeder.SeedAsync(productDb, userDb, orderDb);
 }
 app.UseAuthorization();
 app.UseHttpsRedirection();

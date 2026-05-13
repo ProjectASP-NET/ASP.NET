@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace D_DStore.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDB : Migration
+    public partial class ProductInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -100,8 +100,6 @@ namespace D_DStore.DataAccess.Migrations
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     StockQuantity = table.Column<int>(type: "integer", nullable: false),
                     LikeCount = table.Column<int>(type: "integer", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
                     BrandId = table.Column<int>(type: "integer", nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),

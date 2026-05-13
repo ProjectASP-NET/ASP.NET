@@ -11,7 +11,7 @@ namespace D_DStore.DataAccess.Reps
 {
     public class BrandRepository : Repository<BrandData>, IRepository<BrandData>
     { 
-        public BrandRepository(AppDbContext context) : base(context) { }
+        public BrandRepository(ProductDbContext context) : base(context) { }
 
         public override async Task<IEnumerable<BrandData>> GetAllAsync()
         {
