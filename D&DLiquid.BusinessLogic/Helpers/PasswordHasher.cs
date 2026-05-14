@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using D_DStore.BusinessLogic.Interfaces.Auth;
 
 namespace D_DStore.BusinessLogic.Helpers
 {
-    public static class PasswordHasher
+    public class PasswordHasher : IPasswordHasher
     {
-        public static string HashPassword(string password)
+        public string Hash(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public static bool VerifyPassword(string password, string hash)
+        public bool Verify(string password, string hash)
         {
             return BCrypt.Net.BCrypt.Verify(password, hash);
         }

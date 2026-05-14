@@ -4,11 +4,11 @@ using System.Text;
 
 namespace D_DStore.BusinessLogic.Helpers
 {
-    public class JWTSettings
+    public class JwtOptions
     {
         public string Issuer { get; set; } = string.Empty;
         public string Audience { get; set; } = string.Empty;
-        public string SecretKey { get; set; } = string.Empty;
-        public int ExpiryMinutes { get; set; }
+        public string Key { get; set; } = string.Empty;
+        public int ExpireMinutes { get; set; } = 60;
     }
 }

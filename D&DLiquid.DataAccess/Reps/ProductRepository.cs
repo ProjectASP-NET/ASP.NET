@@ -1,4 +1,4 @@
-﻿using D_DLiquid.DataAccess.Interfaces;
+using D_DLiquid.DataAccess.Interfaces;
 using D_DLiquid.DataAccess.Reps;
 using D_DStore.DataAccess.DB;
 using D_DStore.Domain.Entities.Product;
@@ -16,7 +16,7 @@ namespace D_DStore.DataAccess.Reps
         {
             return await _dbSet
             .Include(p => p.Brand)
-            .ThenInclude(b => b.Country)
+            .ThenInclude(b => b!.Country)
             .Include(p => p.Category)
             .Include(p => p.Tags)
             .Include(p => p.Images)
@@ -26,7 +26,7 @@ namespace D_DStore.DataAccess.Reps
         {
             return await _dbSet
            .Include(p => p.Brand)
-           .ThenInclude(b => b.Country)
+           .ThenInclude(b => b!.Country)
            .Include(p => p.Category)
            .Include(p => p.Tags)
            .Include(p => p.Images)

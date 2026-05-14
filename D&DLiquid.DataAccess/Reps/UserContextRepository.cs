@@ -1,5 +1,6 @@
 ﻿using D_DLiquid.DataAccess.Interfaces;
 using D_DStore.DataAccess.DB;
+using D_DStore.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

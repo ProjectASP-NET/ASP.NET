@@ -19,8 +19,6 @@ namespace D_DStore.DataAccess.DB
             await productContext.Database.MigrateAsync();
             await userContext.Database.MigrateAsync();
             await orderContext.Database.MigrateAsync();
-
-            // 1. Роли
             if (!userContext.Roles.Any())
             {
                 var roles = new List<RoleData>
@@ -44,8 +42,6 @@ namespace D_DStore.DataAccess.DB
                 await userContext.Roles.AddRangeAsync(roles);
                 await userContext.SaveChangesAsync();
             }
-
-            // 2. Пользователи
             if (!userContext.Users.Any())
             {
                 var adminRole = await userContext.Roles.FirstAsync(r => r.Name == "Admin");
@@ -57,22 +53,27 @@ namespace D_DStore.DataAccess.DB
                     {
                         NickName = "admin",
                         Email = "admin@ddliquid.com",
-                        PasswordHash = "hashed_password_admin", // В реальном проекте используйте BCrypt или аналог
+                        PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin123!"),
+                        RoleId = adminRole.Id
+                    },
+                      new UserData
+                    {
+                        NickName = "admin1",
+                        Email = "admin1@example.com",
+                        PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin123!"),
                         RoleId = adminRole.Id
                     },
                     new UserData
                     {
                         NickName = "testuser",
                         Email = "user@test.com",
-                        PasswordHash = "hashed_password_user",
+                        PasswordHash = BCrypt.Net.BCrypt.HashPassword("User123!"),
                         RoleId = userRole.Id
                     }
                 };
                 await userContext.Users.AddRangeAsync(users);
                 await userContext.SaveChangesAsync();
             }
-
-            // 3. Страны
             if (!await productContext.Countries.AnyAsync())
             {
                 var countries = new List<CountryData>
@@ -86,8 +87,6 @@ namespace D_DStore.DataAccess.DB
                 await productContext.Countries.AddRangeAsync(countries);
                 await productContext.SaveChangesAsync();
             }
-
-            // 4. Бренды
             if (!await productContext.Brands.AnyAsync())
             {
                 var us = await productContext.Countries.FirstAsync(c => c.Code == "US");
@@ -106,8 +105,6 @@ namespace D_DStore.DataAccess.DB
                 await productContext.Brands.AddRangeAsync(brands);
                 await productContext.SaveChangesAsync();
             }
-
-            // 5. Категории
             if (!await productContext.Categories.AnyAsync())
             {
                 var categories = new List<ProductCategoryData>
@@ -119,8 +116,6 @@ namespace D_DStore.DataAccess.DB
                 await productContext.Categories.AddRangeAsync(categories);
                 await productContext.SaveChangesAsync();
             }
-
-            // 6. Теги
             if (!await productContext.Tags.AnyAsync())
             {
                 var tags = new List<ProductTagData>
