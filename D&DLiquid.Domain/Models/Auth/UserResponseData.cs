@@ -5,7 +5,7 @@ namespace D_DStore.Domain.Models.Auth
         public int Id { get; set; }
         public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty;
+        public RoleResponseData Role { get; set; } = null!;
         public DateTime RegisteredOn { get; set; }
     }
 }

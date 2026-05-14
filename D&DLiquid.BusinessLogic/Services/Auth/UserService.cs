@@ -50,9 +50,9 @@ namespace D_DStore.BusinessLogic.Services.Auth
             if (existingByEmail != null)
                 throw new InvalidOperationException("Email already exists");
 
-            var existingByNickName = await _userRepository.GetByNickNameAsync(data.NickName);
+            var existingByNickName = await _userRepository.GetByNickNameAsync(data.Username);
             if (existingByNickName != null)
-                throw new InvalidOperationException("NickName already exists");
+                throw new InvalidOperationException("Username already exists");
 
             var userRole = _userRepository.GetRoleByName(role);
             if (userRole == null)
@@ -60,7 +60,7 @@ namespace D_DStore.BusinessLogic.Services.Auth
 
             var user = new UserData
             {
-                NickName = data.NickName,
+                NickName = data.Username,
                 Email = data.Email,
                 PasswordHash = _passwordHasher.Hash(data.Password),
                 RoleId = userRole.Id
@@ -103,7 +103,7 @@ namespace D_DStore.BusinessLogic.Services.Auth
             if (user == null) return null;
 
             if (data.Email != null) user.Email = data.Email;
-            if (data.NickName != null) user.NickName = data.NickName;
+            if (data.Username != null) user.NickName = data.Username;
 
             var updated = await _userRepository.UpdateAsync(id, user);
             return updated == null ? null : _mapper.Map<UserResponseData>(updated);

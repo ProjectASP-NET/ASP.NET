@@ -10,6 +10,9 @@ using D_DStore.BusinessLogic.Interfaces.Product.Brand;
 using D_DStore.BusinessLogic.Services.Product.Brand;
 using D_DStore.Domain.Entities.Product;
 using D_DStore.Domain.Entities.BaseProduct.Brand;
+using D_DStore.Domain.Entities.Liquid;
+using D_DStore.Domain.Entities.Vape;
+using D_DStore.Domain.Entities.Consumable;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -28,13 +31,11 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 builder.Services.AddDbContext<OrderDbContext>(options =>
     options.UseNpgsql(dbConnection));
 
-// Auth services
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-// Authentication
 var jwtSection = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSection["Key"]!);
 
@@ -68,6 +69,9 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(ProductContextRepository<>));
 builder.Services.AddScoped<IRepository<ProductData>, ProductRepository>();
+builder.Services.AddScoped<IRepository<LiquidData>, LiquidRepository>();
+builder.Services.AddScoped<IRepository<VapeData>, VapeRepository>();
+builder.Services.AddScoped<IRepository<ConsumableData>, ConsumableRepository>();
 builder.Services.AddScoped<IRepository<BrandData>, BrandRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
@@ -83,7 +87,12 @@ builder.Services.AddScoped<IFlavorService, FlavorService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+    });
 
 builder.Services.AddSwaggerGen(c =>
 {

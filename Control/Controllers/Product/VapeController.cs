@@ -2,8 +2,8 @@
 using D_DStore.BusinessLogic.Interfaces.Product;
 using D_DStore.Domain.Models.Product;
 
-public class VapesController : BaseController<VapeDTO>
+public class VapeController : BaseController<VapeDTO>
 {
-    public VapesController(IVapeService service)
+    public VapeController(IVapeService service)
         : base(service, "Vape") { }
 }

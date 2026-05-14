@@ -19,6 +19,20 @@ namespace D_DStore.DataAccess.DB
             await productContext.Database.MigrateAsync();
             await userContext.Database.MigrateAsync();
             await orderContext.Database.MigrateAsync();
+
+            // Очистка существующих данных (для разработки)
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"LiquidFlavors\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"ProductTags\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"ProductImages\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Liquids\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Vapes\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Consumables\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Products\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Flavors\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Tags\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Categories\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Brands\"");
+            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Countries\"");
             if (!userContext.Roles.Any())
             {
                 var roles = new List<RoleData>
@@ -157,17 +171,6 @@ namespace D_DStore.DataAccess.DB
 
                 var catLiquid = await productContext.Categories.FirstAsync(c => c.Name == "Жидкости");
 
-                var fMango = await productContext.Flavors.FirstAsync(f => f.Name == "Mango");
-                var fBlueberry = await productContext.Flavors.FirstAsync(f => f.Name == "Blueberry");
-                var fIce = await productContext.Flavors.FirstAsync(f => f.Name == "Ice");
-                var fStrawberry = await productContext.Flavors.FirstAsync(f => f.Name == "Strawberry");
-                var fWatermelon = await productContext.Flavors.FirstAsync(f => f.Name == "Watermelon");
-                var fPeach = await productContext.Flavors.FirstAsync(f => f.Name == "Peach");
-
-                var tagHit = await productContext.Tags.FirstAsync(t => t.Name == "Хит продаж");
-                var tagSalt = await productContext.Tags.FirstAsync(t => t.Name == "Солевой");
-                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
-
                 var liquids = new List<LiquidData>
                 {
                     new LiquidData
@@ -181,11 +184,9 @@ namespace D_DStore.DataAccess.DB
                         IceLevel = 3,
                         BrandId = elfbar.Id,
                         CategoryId = catLiquid.Id,
-                        Flavors = new List<FlavorData> { fBlueberry, fIce },
-                        Tags = new List<ProductTagData> { tagHit, tagSalt },
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "images/blueberry_ice.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
                         }
                     },
                     new LiquidData
@@ -199,11 +200,9 @@ namespace D_DStore.DataAccess.DB
                         IceLevel = 0,
                         BrandId = nasty.Id,
                         CategoryId = catLiquid.Id,
-                        Flavors = new List<FlavorData> { fMango, fPeach },
-                        Tags = new List<ProductTagData> { tagNew },
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "images/mango_peach.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
                         }
                     },
                     new LiquidData
@@ -217,15 +216,186 @@ namespace D_DStore.DataAccess.DB
                         IceLevel = 2,
                         BrandId = vampire.Id,
                         CategoryId = catLiquid.Id,
-                        Flavors = new List<FlavorData> { fStrawberry, fWatermelon },
-                        Tags = new List<ProductTagData> { tagHit },
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "images/heisenberg.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new LiquidData
+                    {
+                        Name = "Watermelon Ice",
+                        Description = "Освежающий арбуз с ледяным послевкусием",
+                        Price = 11.99m,
+                        StockQuantity = 45,
+                        Volume = 30,
+                        Nicotine = 50,
+                        IceLevel = 5,
+                        BrandId = elfbar.Id,
+                        CategoryId = catLiquid.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new LiquidData
+                    {
+                        Name = "Strawberry Lemonade",
+                        Description = "Клубничный лимонад — идеальное сочетание",
+                        Price = 13.49m,
+                        StockQuantity = 30,
+                        Volume = 60,
+                        Nicotine = 0,
+                        IceLevel = 0,
+                        BrandId = nasty.Id,
+                        CategoryId = catLiquid.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new LiquidData
+                    {
+                        Name = "Grape Blast",
+                        Description = "Насыщенный виноградный вкус",
+                        Price = 8.99m,
+                        StockQuantity = 40,
+                        Volume = 100,
+                        Nicotine = 3,
+                        IceLevel = 1,
+                        BrandId = vampire.Id,
+                        CategoryId = catLiquid.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new LiquidData
+                    {
+                        Name = "Peach Ice Tea",
+                        Description = "Персиковый чай со льдом",
+                        Price = 12.49m,
+                        StockQuantity = 25,
+                        Volume = 60,
+                        Nicotine = 12,
+                        IceLevel = 2,
+                        BrandId = nasty.Id,
+                        CategoryId = catLiquid.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new LiquidData
+                    {
+                        Name = "Triple Berry",
+                        Description = "Микс из трех ягод — черника, клубника и арбуз",
+                        Price = 14.99m,
+                        StockQuantity = 15,
+                        Volume = 30,
+                        Nicotine = 20,
+                        IceLevel = 0,
+                        BrandId = elfbar.Id,
+                        CategoryId = catLiquid.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new LiquidData
+                    {
+                        Name = "Mango Tango",
+                        Description = "Тропическое манго с легкой кислинкой",
+                        Price = 11.49m,
+                        StockQuantity = 55,
+                        Volume = 100,
+                        Nicotine = 6,
+                        IceLevel = 1,
+                        BrandId = vampire.Id,
+                        CategoryId = catLiquid.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new LiquidData
+                    {
+                        Name = "Blueberry Lemon",
+                        Description = "Черника с лимоном — свежий и яркий вкус",
+                        Price = 10.49m,
+                        StockQuantity = 38,
+                        Volume = 60,
+                        Nicotine = 3,
+                        IceLevel = 0,
+                        BrandId = nasty.Id,
+                        CategoryId = catLiquid.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
                         }
                     }
                 };
                 await productContext.Liquids.AddRangeAsync(liquids);
+                await productContext.SaveChangesAsync();
+
+                // Добавляем связи many-to-many после сохранения продуктов
+                var fMango = await productContext.Flavors.FirstAsync(f => f.Name == "Mango");
+                var fBlueberry = await productContext.Flavors.FirstAsync(f => f.Name == "Blueberry");
+                var fIce = await productContext.Flavors.FirstAsync(f => f.Name == "Ice");
+                var fStrawberry = await productContext.Flavors.FirstAsync(f => f.Name == "Strawberry");
+                var fWatermelon = await productContext.Flavors.FirstAsync(f => f.Name == "Watermelon");
+                var fPeach = await productContext.Flavors.FirstAsync(f => f.Name == "Peach");
+                var fGrape = await productContext.Flavors.FirstAsync(f => f.Name == "Grape");
+                var fLemon = await productContext.Flavors.FirstAsync(f => f.Name == "Lemon");
+
+                var tagHit = await productContext.Tags.FirstAsync(t => t.Name == "Хит продаж");
+                var tagSalt = await productContext.Tags.FirstAsync(t => t.Name == "Солевой");
+                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
+
+                var savedLiquids = await productContext.Liquids.Include(l => l.Flavors).Include(l => l.Tags).ToListAsync();
+
+                savedLiquids[0].Flavors.Add(fBlueberry);
+                savedLiquids[0].Flavors.Add(fIce);
+                savedLiquids[0].Tags.Add(tagHit);
+                savedLiquids[0].Tags.Add(tagSalt);
+
+                savedLiquids[1].Flavors.Add(fMango);
+                savedLiquids[1].Flavors.Add(fPeach);
+                savedLiquids[1].Tags.Add(tagNew);
+
+                savedLiquids[2].Flavors.Add(fStrawberry);
+                savedLiquids[2].Flavors.Add(fWatermelon);
+                savedLiquids[2].Tags.Add(tagHit);
+
+                savedLiquids[3].Flavors.Add(fWatermelon);
+                savedLiquids[3].Flavors.Add(fIce);
+                savedLiquids[3].Tags.Add(tagSalt);
+                savedLiquids[3].Tags.Add(tagNew);
+
+                savedLiquids[4].Flavors.Add(fStrawberry);
+                savedLiquids[4].Flavors.Add(fLemon);
+                savedLiquids[4].Tags.Add(tagNew);
+
+                savedLiquids[5].Flavors.Add(fGrape);
+                savedLiquids[5].Tags.Add(tagHit);
+
+                savedLiquids[6].Flavors.Add(fPeach);
+                savedLiquids[6].Flavors.Add(fIce);
+                savedLiquids[6].Tags.Add(tagNew);
+
+                savedLiquids[7].Flavors.Add(fBlueberry);
+                savedLiquids[7].Flavors.Add(fStrawberry);
+                savedLiquids[7].Flavors.Add(fWatermelon);
+                savedLiquids[7].Tags.Add(tagHit);
+                savedLiquids[7].Tags.Add(tagSalt);
+
+                savedLiquids[8].Flavors.Add(fMango);
+                savedLiquids[8].Flavors.Add(fLemon);
+                savedLiquids[8].Tags.Add(tagNew);
+
+                savedLiquids[9].Flavors.Add(fBlueberry);
+                savedLiquids[9].Flavors.Add(fLemon);
+                savedLiquids[9].Tags.Add(tagNew);
+
                 await productContext.SaveChangesAsync();
             }
 
@@ -234,9 +404,8 @@ namespace D_DStore.DataAccess.DB
             {
                 var voopoo = await productContext.Brands.FirstAsync(b => b.Name == "Voopoo");
                 var geekvape = await productContext.Brands.FirstAsync(b => b.Name == "Geekvape");
+                var elfbar = await productContext.Brands.FirstAsync(b => b.Name == "Elfbar");
                 var catVape = await productContext.Categories.FirstAsync(c => c.Name == "Девайсы");
-                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
-                var tagHit = await productContext.Tags.FirstAsync(t => t.Name == "Хит продаж");
 
                 var vapes = new List<VapeData>
                 {
@@ -253,10 +422,9 @@ namespace D_DStore.DataAccess.DB
                         CoilResistance = 0.15m,
                         BrandId = voopoo.Id,
                         CategoryId = catVape.Id,
-                        Tags = new List<ProductTagData> { tagHit },
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "images/drag4.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
                         }
                     },
                     new VapeData
@@ -272,14 +440,178 @@ namespace D_DStore.DataAccess.DB
                         CoilResistance = 0.2m,
                         BrandId = geekvape.Id,
                         CategoryId = catVape.Id,
-                        Tags = new List<ProductTagData> { tagNew },
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "images/aegis2.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Drag X Plus",
+                        Description = "Мощный под-мод с регулировкой до 100W",
+                        Price = 54.99m,
+                        StockQuantity = 20,
+                        BatteryCapacity = 2500,
+                        MaxPower = 100,
+                        Color = "Blue",
+                        TankCapacity = 4.5m,
+                        CoilResistance = 0.2m,
+                        BrandId = voopoo.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Aegis Mini",
+                        Description = "Компактный защищенный мод для новичков",
+                        Price = 44.99m,
+                        StockQuantity = 25,
+                        BatteryCapacity = 2200,
+                        MaxPower = 80,
+                        Color = "Green",
+                        TankCapacity = 3.5m,
+                        CoilResistance = 0.4m,
+                        BrandId = geekvape.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Elfbar BC5000",
+                        Description = "Популярная одноразка на 5000 затяжек",
+                        Price = 19.99m,
+                        StockQuantity = 100,
+                        BatteryCapacity = 650,
+                        MaxPower = 40,
+                        Color = "Red",
+                        TankCapacity = 2.0m,
+                        CoilResistance = 1.2m,
+                        BrandId = elfbar.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Voopoo Vinci 3",
+                        Description = "Стильный под-мод с OLED дисплеем",
+                        Price = 59.99m,
+                        StockQuantity = 18,
+                        BatteryCapacity = 1800,
+                        MaxPower = 50,
+                        Color = "Black",
+                        TankCapacity = 4.0m,
+                        CoilResistance = 0.3m,
+                        BrandId = voopoo.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Geekvape Z200",
+                        Description = "Двухаккумуляторный мод с мощностью 200W",
+                        Price = 89.99m,
+                        StockQuantity = 8,
+                        BatteryCapacity = 5000,
+                        MaxPower = 200,
+                        Color = "Silver",
+                        TankCapacity = 6.0m,
+                        CoilResistance = 0.15m,
+                        BrandId = geekvape.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Elfbar 600",
+                        Description = "Компактная одноразка на 600 затяжек",
+                        Price = 9.99m,
+                        StockQuantity = 150,
+                        BatteryCapacity = 550,
+                        MaxPower = 30,
+                        Color = "Pink",
+                        TankCapacity = 2.0m,
+                        CoilResistance = 1.6m,
+                        BrandId = elfbar.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Voopoo Argus Pro",
+                        Description = "Универсальный мод с кожаной отделкой",
+                        Price = 69.99m,
+                        StockQuantity = 12,
+                        BatteryCapacity = 3000,
+                        MaxPower = 80,
+                        Color = "Brown",
+                        TankCapacity = 4.5m,
+                        CoilResistance = 0.25m,
+                        BrandId = voopoo.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new VapeData
+                    {
+                        Name = "Geekvape Aegis Solo 2",
+                        Description = "Однобатарейный защищенный мод",
+                        Price = 49.99m,
+                        StockQuantity = 22,
+                        BatteryCapacity = 2000,
+                        MaxPower = 100,
+                        Color = "Blue",
+                        TankCapacity = 5.0m,
+                        CoilResistance = 0.2m,
+                        BrandId = geekvape.Id,
+                        CategoryId = catVape.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
                         }
                     }
                 };
                 await productContext.Vapes.AddRangeAsync(vapes);
+                await productContext.SaveChangesAsync();
+
+                // Добавляем Tags после сохранения
+                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
+                var tagHit = await productContext.Tags.FirstAsync(t => t.Name == "Хит продаж");
+                var tagDiscount = await productContext.Tags.FirstAsync(t => t.Name == "Скидка");
+
+                var savedVapes = await productContext.Vapes.Include(v => v.Tags).ToListAsync();
+
+                savedVapes[0].Tags.Add(tagHit);
+                savedVapes[1].Tags.Add(tagNew);
+                savedVapes[2].Tags.Add(tagHit);
+                savedVapes[3].Tags.Add(tagNew);
+                savedVapes[4].Tags.Add(tagHit);
+                savedVapes[5].Tags.Add(tagNew);
+                savedVapes[6].Tags.Add(tagNew);
+                savedVapes[6].Tags.Add(tagHit);
+                savedVapes[7].Tags.Add(tagDiscount);
+                savedVapes[8].Tags.Add(tagHit);
+                savedVapes[9].Tags.Add(tagNew);
+
                 await productContext.SaveChangesAsync();
             }
 
@@ -287,8 +619,9 @@ namespace D_DStore.DataAccess.DB
             if (!await productContext.Consumables.AnyAsync())
             {
                 var geekvape = await productContext.Brands.FirstAsync(b => b.Name == "Geekvape");
+                var voopoo = await productContext.Brands.FirstAsync(b => b.Name == "Voopoo");
+                var elfbar = await productContext.Brands.FirstAsync(b => b.Name == "Elfbar");
                 var catCons = await productContext.Categories.FirstAsync(c => c.Name == "Расходники");
-                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
 
                 var consumables = new List<ConsumableData>
                 {
@@ -300,10 +633,9 @@ namespace D_DStore.DataAccess.DB
                         StockQuantity = 100,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
-                        Tags = new List<ProductTagData> { tagNew },
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "images/coil_z02.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
                         }
                     },
                     new ConsumableData
@@ -316,11 +648,130 @@ namespace D_DStore.DataAccess.DB
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "images/cotton_bacon.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "Coil Voopoo PnP 0.15",
+                        Description = "Испаритель 0.15 Ом для Drag серии",
+                        Price = 5.49m,
+                        StockQuantity = 80,
+                        BrandId = voopoo.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "Battery 18650 3000mAh",
+                        Description = "Аккумулятор 18650 для модов",
+                        Price = 12.99m,
+                        StockQuantity = 50,
+                        BrandId = geekvape.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "Battery 21700 4000mAh",
+                        Description = "Мощный аккумулятор 21700",
+                        Price = 15.99m,
+                        StockQuantity = 40,
+                        BrandId = geekvape.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "USB-C Charger 2A",
+                        Description = "Быстрое зарядное устройство USB-C",
+                        Price = 9.99m,
+                        StockQuantity = 70,
+                        BrandId = voopoo.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "Drip Tip 810",
+                        Description = "Широкий дрип-тип из нержавейки",
+                        Price = 3.99m,
+                        StockQuantity = 120,
+                        BrandId = geekvape.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "Coil Geekvape Z 0.4",
+                        Description = "Испаритель 0.4 Ом для MTL затяжки",
+                        Price = 4.49m,
+                        StockQuantity = 90,
+                        BrandId = geekvape.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "Replacement Glass 5ml",
+                        Description = "Запасное стекло для бака 5мл",
+                        Price = 2.99m,
+                        StockQuantity = 150,
+                        BrandId = voopoo.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                        }
+                    },
+                    new ConsumableData
+                    {
+                        Name = "Coil Voopoo PnP 0.3",
+                        Description = "Универсальный испаритель 0.3 Ом",
+                        Price = 5.99m,
+                        StockQuantity = 75,
+                        BrandId = voopoo.Id,
+                        CategoryId = catCons.Id,
+                        Images = new List<ProductImageData>
+                        {
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
                         }
                     }
                 };
                 await productContext.Consumables.AddRangeAsync(consumables);
+                await productContext.SaveChangesAsync();
+
+                // Добавляем Tags после сохранения
+                var tagNew = await productContext.Tags.FirstAsync(t => t.Name == "Новинка");
+                var tagHit = await productContext.Tags.FirstAsync(t => t.Name == "Хит продаж");
+
+                var savedConsumables = await productContext.Consumables.Include(c => c.Tags).ToListAsync();
+
+                savedConsumables[0].Tags.Add(tagNew);
+                savedConsumables[2].Tags.Add(tagHit);
+                savedConsumables[3].Tags.Add(tagHit);
+                savedConsumables[4].Tags.Add(tagNew);
+                savedConsumables[7].Tags.Add(tagNew);
+                savedConsumables[9].Tags.Add(tagHit);
+
                 await productContext.SaveChangesAsync();
             }
 

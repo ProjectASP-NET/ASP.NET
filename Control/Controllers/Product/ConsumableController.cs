@@ -2,8 +2,8 @@
 using D_DStore.BusinessLogic.Interfaces.Product;
 using D_DStore.Domain.Models.Product;
 
-public class ConsumablesController : BaseController<ConsumableDTO>
+public class ConsumableController : BaseController<ConsumableDTO>
 {
-    public ConsumablesController(IConsumableService service)
+    public ConsumableController(IConsumableService service)
         : base(service, "Consumable") { }
 }
