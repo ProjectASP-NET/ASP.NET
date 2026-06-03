@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using D_DStore.BusinessLogic.Interfaces.Auth;
-using D_DStore.Domain.Models.Auth;
+using DDLiquid.BusinessLogic.Interfaces.Auth;
+using DDLiquid.Domain.Models.Auth;
 
-namespace D_DLiquid.API.Controllers
+namespace DDLiquid.API.Controllers
 {
     [Route("api/auth")]
     [ApiController]
@@ -52,3 +52,4 @@ namespace D_DLiquid.API.Controllers
         }
     }
 }
+

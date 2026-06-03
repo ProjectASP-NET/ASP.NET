@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using D_DStore.BusinessLogic.Interfaces;
-using D_DStore.Domain.Models.BaseActions;
+using Microsoft.AspNetCore.Mvc;
+using DDLiquid.BusinessLogic.Interfaces;
+using DDLiquid.Domain.Models.BaseActions;
 using Microsoft.OpenApi.MicrosoftExtensions;
 using Microsoft.AspNetCore.Authorization;
 

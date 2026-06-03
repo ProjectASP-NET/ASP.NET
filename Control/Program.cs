@@ -1,28 +1,28 @@
-using D_DLiquid.DataAccess.Interfaces;
-using D_DLiquid.DataAccess.Reps;
-using D_DStore.DataAccess.DB;
+using DDLiquid.DataAccess.Interfaces;
+using DDLiquid.DataAccess.Reps;
+using DDLiquid.DataAccess.DB;
 using Microsoft.EntityFrameworkCore;
-using D_DStore.BusinessLogic.Mapping;
-using D_DStore.BusinessLogic.Services.BaseProduct;
-using D_DStore.BusinessLogic.Interfaces.Product;
-using D_DStore.BusinessLogic.Services.Product;
-using D_DStore.BusinessLogic.Interfaces.Product.Brand;
-using D_DStore.BusinessLogic.Services.Product.Brand;
-using D_DStore.Domain.Entities.Product;
-using D_DStore.Domain.Entities.BaseProduct.Brand;
-using D_DStore.Domain.Entities.Liquid;
-using D_DStore.Domain.Entities.Vape;
-using D_DStore.Domain.Entities.Consumable;
+using DDLiquid.BusinessLogic.Mapping;
+using DDLiquid.BusinessLogic.Services.BaseProduct;
+using DDLiquid.BusinessLogic.Interfaces.Product;
+using DDLiquid.BusinessLogic.Services.Product;
+using DDLiquid.BusinessLogic.Interfaces.Product.Brand;
+using DDLiquid.BusinessLogic.Services.Product.Brand;
+using DDLiquid.Domain.Entities.Product;
+using DDLiquid.Domain.Entities.BaseProduct.Brand;
+using DDLiquid.Domain.Entities.Liquid;
+using DDLiquid.Domain.Entities.Vape;
+using DDLiquid.Domain.Entities.Consumable;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using D_DStore.BusinessLogic.Helpers;
-using D_DStore.BusinessLogic.Services.Auth;
-using D_DStore.BusinessLogic.Interfaces.Auth;
-using D_DStore.DataAccess.Reps;
+using DDLiquid.BusinessLogic.Helpers;
+using DDLiquid.BusinessLogic.Services.Auth;
+using DDLiquid.BusinessLogic.Interfaces.Auth;
+using DDLiquid.DataAccess.Reps;
 
 var builder = WebApplication.CreateBuilder(args);
-var dbConnection = builder.Configuration.GetConnectionString("D_DLiquidDB");
+var dbConnection = builder.Configuration.GetConnectionString("DDLiquidDB");
 
 builder.Services.AddDbContext<ProductDbContext>(options =>
     options.UseNpgsql(dbConnection));
@@ -142,3 +142,4 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+

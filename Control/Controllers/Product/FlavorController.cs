@@ -1,7 +1,7 @@
-﻿using Control.Controllers;
-using D_DStore.BusinessLogic.Interfaces;
-using D_DStore.BusinessLogic.Interfaces.Product;
-using D_DStore.Domain.Models.Product;
+using Control.Controllers;
+using DDLiquid.BusinessLogic.Interfaces;
+using DDLiquid.BusinessLogic.Interfaces.Product;
+using DDLiquid.Domain.Models.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Control.API.Controllers.Product
@@ -13,3 +13,4 @@ namespace Control.API.Controllers.Product
         }
     }
 }
+
