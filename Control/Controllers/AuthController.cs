@@ -20,6 +20,8 @@ namespace DDLiquid.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterData data)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             try
             {
                 var result = await _userService.RegisterAsync(data);
@@ -34,6 +36,8 @@ namespace DDLiquid.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginData data)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var result = await _userService.LoginAsync(data);
             return result == null
                 ? Unauthorized(new { Message = "Invalid login or password" })
@@ -44,6 +48,8 @@ namespace DDLiquid.API.Controllers
         [Authorize]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordData data)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var userId = int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)!);
             var success = await _userService.ChangePasswordAsync(userId, data.CurrentPassword, data.NewPassword);
             return success

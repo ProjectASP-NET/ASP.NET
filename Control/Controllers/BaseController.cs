@@ -44,6 +44,8 @@ namespace Control.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Create([FromBody] TDTO dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var created = await _service.CreateAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.GetType().GetProperty("Id")?.GetValue(created) }, created);
         }
@@ -52,6 +54,8 @@ namespace Control.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Update(int id, [FromBody] TDTO dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var result = await _service.UpdateAsync(id, dto);
             if (result is null)
                 return NotFound(new Response<TDTO> { Success = false, Message = ErrorMessage.NotFound(_entityName, id) });

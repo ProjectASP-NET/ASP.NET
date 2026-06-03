@@ -44,7 +44,22 @@ namespace DDLiquid.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserUpdateData data)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var updated = await _userService.UpdateAsync(id, data);
+            return updated == null ? NotFound() : Ok(updated);
+        }
+
+        [HttpPut("{id}/role")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateRole(int id, [FromBody] DDLiquid.Domain.Models.Auth.UserUpdateData data)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!data.RoleId.HasValue)
+                return BadRequest(new { Message = "RoleId is required" });
+
+            var updated = await _userService.UpdateRoleAsync(id, data.RoleId.Value);
             return updated == null ? NotFound() : Ok(updated);
         }
 

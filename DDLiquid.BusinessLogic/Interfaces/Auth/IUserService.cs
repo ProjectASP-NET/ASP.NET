@@ -9,6 +9,7 @@ namespace DDLiquid.BusinessLogic.Interfaces.Auth
         Task<AuthResponseData> RegisterAsync(UserRegisterData data);
         Task<AuthResponseData?> LoginAsync(UserLoginData data);
         Task<UserResponseData?> UpdateAsync(int id, UserUpdateData data);
+        Task<UserResponseData?> UpdateRoleAsync(int id, int roleId);
         Task<bool> ChangePasswordAsync(int userId, string currentPassword, string newPassword);
         Task<bool> DeleteAsync(int id);
     }

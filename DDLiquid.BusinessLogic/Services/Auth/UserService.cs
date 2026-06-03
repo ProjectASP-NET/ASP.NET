@@ -104,9 +104,21 @@ namespace DDLiquid.BusinessLogic.Services.Auth
 
             if (data.Email != null) user.Email = data.Email;
             if (data.Username != null) user.NickName = data.Username;
+            if (data.RoleId.HasValue) user.RoleId = data.RoleId.Value;
 
             var updated = await _userRepository.UpdateAsync(id, user);
             return updated == null ? null : _mapper.Map<UserResponseData>(updated);
+        }
+
+        public async Task<UserResponseData?> UpdateRoleAsync(int id, int roleId)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null) return null;
+
+            user.RoleId = roleId;
+            await _userRepository.UpdateAsync(id, user);
+            var updatedWithRole = await _userRepository.GetByIdAsync(id);
+            return updatedWithRole == null ? null : _mapper.Map<UserResponseData>(updatedWithRole);
         }
 
         public async Task<bool> ChangePasswordAsync(int userId, string currentPassword, string newPassword)
