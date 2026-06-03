@@ -19,8 +19,6 @@ using System.Text;
 using DDLiquid.BusinessLogic.Helpers;
 using DDLiquid.BusinessLogic.Services.Auth;
 using DDLiquid.BusinessLogic.Interfaces.Auth;
-using DDLiquid.DataAccess.Reps;
-
 var builder = WebApplication.CreateBuilder(args);
 var dbConnection = builder.Configuration.GetConnectionString("DDLiquidDB");
 
@@ -85,6 +83,8 @@ builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IFlavorService, FlavorService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IInteractionRepository, InteractionRepository>();
+builder.Services.AddScoped<IInteractionService, InteractionService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers()

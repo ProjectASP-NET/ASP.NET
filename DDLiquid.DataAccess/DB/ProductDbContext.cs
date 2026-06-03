@@ -31,6 +31,8 @@ namespace DDLiquid.DataAccess.DB
             public DbSet<ProductTagData> Tags { get; set; }
             public DbSet<CountryData> Countries { get; set; }
             public DbSet<ProductImageData> ProductImages { get; set; }
+            public DbSet<ProductLikeData> ProductLikes { get; set; }
+            public DbSet<ProductFavoriteData> ProductFavorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -71,6 +73,14 @@ namespace DDLiquid.DataAccess.DB
                     .WithMany(c => c.Brands)
                     .HasForeignKey(b => b.CountryId)
                     .OnDelete(DeleteBehavior.SetNull);
+
+                modelBuilder.Entity<ProductLikeData>()
+                    .HasIndex(l => new { l.UserId, l.ProductId })
+                    .IsUnique();
+
+                modelBuilder.Entity<ProductFavoriteData>()
+                    .HasIndex(f => new { f.UserId, f.ProductId })
+                    .IsUnique();
             }
 
             public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
