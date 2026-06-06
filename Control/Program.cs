@@ -68,7 +68,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextJs", policy =>
     {
-        policy.WithOrigins("http://localhost:3000","https://react-view-sct7-hzdfkdd94-dms3.vercel.app")
+        policy.WithOrigins("http://localhost:3000","https://react-view-sct7.vercel.app/")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
