@@ -180,7 +180,8 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
@@ -196,7 +197,8 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
@@ -212,7 +214,8 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
@@ -228,7 +231,8 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
@@ -244,12 +248,13 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
                     {
-                        Name = "Grape Blast",
+Name = "Grape Blast",
                         Description = "Насыщенный виноградный вкус",
                         Price = 230m,
                         StockQuantity = 40,
@@ -260,12 +265,13 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija3.png", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
                     {
-                        Name = "Peach Ice Tea",
+Name = "Peach Ice Tea",
                         Description = "Персиковый чай со льдом",
                         Price = 190m,
                         StockQuantity = 25,
@@ -276,12 +282,13 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija3.png", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
                     {
-                        Name = "Triple Berry",
+Name = "Triple Berry",
                         Description = "Микс из трех ягод — черника, клубника и арбуз",
                         Price = 140m,
                         StockQuantity = 15,
@@ -292,12 +299,13 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija3.png", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
                     {
-                        Name = "Mango Tango",
+Name = "Mango Tango",
                         Description = "Тропическое манго с легкой кислинкой",
                         Price = 240m,
                         StockQuantity = 55,
@@ -308,12 +316,13 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija3.png", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new LiquidData
                     {
-                        Name = "Blueberry Lemon",
+Name = "Blueberry Lemon",
                         Description = "Черника с лимоном — свежий и яркий вкус",
                         Price = 175m,
                         StockQuantity = 38,
@@ -324,7 +333,8 @@ Price = 130m,
                         CategoryId = catLiquid.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Jija.png", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Jija3.png", IsMain = false, SortOrder = 2 }
                         }
                     }
                 };
@@ -418,7 +428,8 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
@@ -436,7 +447,8 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
@@ -454,7 +466,8 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
@@ -472,7 +485,8 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
@@ -490,12 +504,13 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
                     {
-                        Name = "Voopoo Vinci 3",
+Name = "Voopoo Vinci 3",
                         Description = "Стильный под-мод с OLED дисплеем",
                         Price = 240m,
                         StockQuantity = 18,
@@ -508,12 +523,13 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
                     {
-                        Name = "Geekvape Z200",
+Name = "Geekvape Z200",
                         Description = "Двухаккумуляторный мод с мощностью 200W",
                         Price = 360m,
                         StockQuantity = 8,
@@ -526,12 +542,13 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
                     {
-                        Name = "Elfbar 600",
+Name = "Elfbar 600",
                         Description = "Компактная одноразка на 600 затяжек",
                         Price = 50m,
                         StockQuantity = 150,
@@ -544,12 +561,13 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
                     {
-                        Name = "Voopoo Argus Pro",
+Name = "Voopoo Argus Pro",
                         Description = "Универсальный мод с кожаной отделкой",
                         Price = 280m,
                         StockQuantity = 12,
@@ -562,12 +580,13 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new VapeData
                     {
-                        Name = "Geekvape Aegis Solo 2",
+Name = "Geekvape Aegis Solo 2",
                         Description = "Однобатарейный защищенный мод",
                         Price = 200m,
                         StockQuantity = 22,
@@ -580,7 +599,8 @@ Price = 130m,
                         CategoryId = catVape.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Pod.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Pod3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     }
                 };
@@ -629,7 +649,8 @@ Price = 130m,
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
@@ -642,7 +663,8 @@ Price = 130m,
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
@@ -655,7 +677,8 @@ Price = 130m,
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
@@ -668,7 +691,8 @@ Description = "Аккумулятор 18650 для модов",
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
@@ -681,12 +705,13 @@ Description = "Аккумулятор 18650 для модов",
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer2.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
                     {
-                        Name = "USB-C Charger 2A",
+Name = "USB-C Charger 2A",
 Description = "Быстрое зарядное устройство USB-C",
                         Price = 50m,
                         StockQuantity = 70,
@@ -694,12 +719,13 @@ Description = "Быстрое зарядное устройство USB-C",
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
                     {
-                        Name = "Drip Tip 810",
+Name = "Drip Tip 810",
                         Description = "Широкий дрип-тип из нержавейки",
                         Price = 50m,
                         StockQuantity = 120,
@@ -707,12 +733,13 @@ Description = "Быстрое зарядное устройство USB-C",
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
                     {
-                        Name = "Coil Geekvape Z 0.4",
+Name = "Coil Geekvape Z 0.4",
                         Description = "Испаритель 0.4 Ом для MTL затяжки",
                         Price = 50m,
                         StockQuantity = 90,
@@ -720,12 +747,13 @@ Description = "Быстрое зарядное устройство USB-C",
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
                     {
-                        Name = "Replacement Glass 5ml",
+Name = "Replacement Glass 5ml",
                         Description = "Запасное стекло для бака 5мл",
                         Price = 50m,
                         StockQuantity = 150,
@@ -733,12 +761,13 @@ Description = "Быстрое зарядное устройство USB-C",
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     },
                     new ConsumableData
                     {
-                        Name = "Coil Voopoo PnP 0.3",
+Name = "Coil Voopoo PnP 0.3",
                         Description = "Универсальный испаритель 0.3 Ом",
                         Price = 50m,
                         StockQuantity = 75,
@@ -746,7 +775,8 @@ Description = "Быстрое зарядное устройство USB-C",
                         CategoryId = catCons.Id,
                         Images = new List<ProductImageData>
                         {
-                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 }
+                            new ProductImageData { Url = "/Automizer.jpg", IsMain = true, SortOrder = 1 },
+                            new ProductImageData { Url = "/Automizer3.jpg", IsMain = false, SortOrder = 2 }
                         }
                     }
                 };
