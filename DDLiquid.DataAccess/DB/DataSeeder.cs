@@ -20,13 +20,6 @@ namespace DDLiquid.DataAccess.DB
             await userContext.Database.MigrateAsync();
             await orderContext.Database.MigrateAsync();
 
-            // Очистка существующих данных (для разработки) — сбрасывает ID sequence
-            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Countries\" RESTART IDENTITY CASCADE");
-            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Brands\" RESTART IDENTITY CASCADE");
-            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Categories\" RESTART IDENTITY CASCADE");
-            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Tags\" RESTART IDENTITY CASCADE");
-            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Flavors\" RESTART IDENTITY CASCADE");
-            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Products\" RESTART IDENTITY CASCADE");
             if (!userContext.Roles.Any())
             {
                 var roles = new List<RoleData>
