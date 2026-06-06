@@ -20,19 +20,13 @@ namespace DDLiquid.DataAccess.DB
             await userContext.Database.MigrateAsync();
             await orderContext.Database.MigrateAsync();
 
-            // Очистка существующих данных (для разработки)
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"LiquidFlavors\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"ProductTags\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"ProductImages\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Liquids\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Vapes\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Consumables\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Products\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Flavors\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Tags\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Categories\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Brands\"");
-            await productContext.Database.ExecuteSqlRawAsync("DELETE FROM \"Countries\"");
+            // Очистка существующих данных (для разработки) — сбрасывает ID sequence
+            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Countries\" RESTART IDENTITY CASCADE");
+            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Brands\" RESTART IDENTITY CASCADE");
+            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Categories\" RESTART IDENTITY CASCADE");
+            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Tags\" RESTART IDENTITY CASCADE");
+            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Flavors\" RESTART IDENTITY CASCADE");
+            await productContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Products\" RESTART IDENTITY CASCADE");
             if (!userContext.Roles.Any())
             {
                 var roles = new List<RoleData>
@@ -177,7 +171,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Blueberry Ice",
                         Description = "Сочная черника с холодком",
-                        Price = 12.99m,
+Price = 130m,
                         StockQuantity = 50,
                         Volume = 30,
                         Nicotine = 20,
@@ -193,7 +187,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Mango Peach",
                         Description = "Спелое манго с персиком",
-                        Price = 10.99m,
+                        Price = 180m,
                         StockQuantity = 35,
                         Volume = 60,
                         Nicotine = 3,
@@ -209,7 +203,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Heisenberg",
                         Description = "Культовый вкус — ягоды с анисом и холодком",
-                        Price = 9.49m,
+                        Price = 160m,
                         StockQuantity = 20,
                         Volume = 50,
                         Nicotine = 6,
@@ -225,7 +219,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Watermelon Ice",
                         Description = "Освежающий арбуз с ледяным послевкусием",
-                        Price = 11.99m,
+                        Price = 135m,
                         StockQuantity = 45,
                         Volume = 30,
                         Nicotine = 50,
@@ -241,7 +235,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Strawberry Lemonade",
                         Description = "Клубничный лимонад — идеальное сочетание",
-                        Price = 13.49m,
+                        Price = 185m,
                         StockQuantity = 30,
                         Volume = 60,
                         Nicotine = 0,
@@ -257,7 +251,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Grape Blast",
                         Description = "Насыщенный виноградный вкус",
-                        Price = 8.99m,
+                        Price = 230m,
                         StockQuantity = 40,
                         Volume = 100,
                         Nicotine = 3,
@@ -273,7 +267,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Peach Ice Tea",
                         Description = "Персиковый чай со льдом",
-                        Price = 12.49m,
+                        Price = 190m,
                         StockQuantity = 25,
                         Volume = 60,
                         Nicotine = 12,
@@ -289,7 +283,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Triple Berry",
                         Description = "Микс из трех ягод — черника, клубника и арбуз",
-                        Price = 14.99m,
+                        Price = 140m,
                         StockQuantity = 15,
                         Volume = 30,
                         Nicotine = 20,
@@ -305,7 +299,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Mango Tango",
                         Description = "Тропическое манго с легкой кислинкой",
-                        Price = 11.49m,
+                        Price = 240m,
                         StockQuantity = 55,
                         Volume = 100,
                         Nicotine = 6,
@@ -321,7 +315,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Blueberry Lemon",
                         Description = "Черника с лимоном — свежий и яркий вкус",
-                        Price = 10.49m,
+                        Price = 175m,
                         StockQuantity = 38,
                         Volume = 60,
                         Nicotine = 3,
@@ -413,7 +407,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Drag 4",
                         Description = "Компактный мод с чипом Gene.TT2",
-                        Price = 64.99m,
+                        Price = 260m,
                         StockQuantity = 15,
                         BatteryCapacity = 3000,
                         MaxPower = 177,
@@ -431,7 +425,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Aegis Legend 2",
                         Description = "Флагманский мод с защитой от воды и пыли",
-                        Price = 79.99m,
+                        Price = 320m,
                         StockQuantity = 10,
                         BatteryCapacity = 4000,
                         MaxPower = 200,
@@ -449,7 +443,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Drag X Plus",
                         Description = "Мощный под-мод с регулировкой до 100W",
-                        Price = 54.99m,
+                        Price = 220m,
                         StockQuantity = 20,
                         BatteryCapacity = 2500,
                         MaxPower = 100,
@@ -467,7 +461,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Aegis Mini",
                         Description = "Компактный защищенный мод для новичков",
-                        Price = 44.99m,
+                        Price = 180m,
                         StockQuantity = 25,
                         BatteryCapacity = 2200,
                         MaxPower = 80,
@@ -485,7 +479,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Elfbar BC5000",
                         Description = "Популярная одноразка на 5000 затяжек",
-                        Price = 19.99m,
+                        Price = 80m,
                         StockQuantity = 100,
                         BatteryCapacity = 650,
                         MaxPower = 40,
@@ -503,7 +497,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Voopoo Vinci 3",
                         Description = "Стильный под-мод с OLED дисплеем",
-                        Price = 59.99m,
+                        Price = 240m,
                         StockQuantity = 18,
                         BatteryCapacity = 1800,
                         MaxPower = 50,
@@ -521,7 +515,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Geekvape Z200",
                         Description = "Двухаккумуляторный мод с мощностью 200W",
-                        Price = 89.99m,
+                        Price = 360m,
                         StockQuantity = 8,
                         BatteryCapacity = 5000,
                         MaxPower = 200,
@@ -539,7 +533,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Elfbar 600",
                         Description = "Компактная одноразка на 600 затяжек",
-                        Price = 9.99m,
+                        Price = 50m,
                         StockQuantity = 150,
                         BatteryCapacity = 550,
                         MaxPower = 30,
@@ -557,7 +551,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Voopoo Argus Pro",
                         Description = "Универсальный мод с кожаной отделкой",
-                        Price = 69.99m,
+                        Price = 280m,
                         StockQuantity = 12,
                         BatteryCapacity = 3000,
                         MaxPower = 80,
@@ -575,7 +569,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Geekvape Aegis Solo 2",
                         Description = "Однобатарейный защищенный мод",
-                        Price = 49.99m,
+                        Price = 200m,
                         StockQuantity = 22,
                         BatteryCapacity = 2000,
                         MaxPower = 100,
@@ -629,7 +623,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Coil Geekvape Z 0.2",
                         Description = "Испаритель 0.2 Ом для серии Aegis",
-                        Price = 4.99m,
+                        Price = 50m,
                         StockQuantity = 100,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
@@ -642,7 +636,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Cotton Bacon Prime",
                         Description = "Органический хлопок для намоток",
-                        Price = 6.49m,
+                        Price = 50m,
                         StockQuantity = 60,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
@@ -655,7 +649,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Coil Voopoo PnP 0.15",
                         Description = "Испаритель 0.15 Ом для Drag серии",
-                        Price = 5.49m,
+                        Price = 50m,
                         StockQuantity = 80,
                         BrandId = voopoo.Id,
                         CategoryId = catCons.Id,
@@ -667,8 +661,8 @@ namespace DDLiquid.DataAccess.DB
                     new ConsumableData
                     {
                         Name = "Battery 18650 3000mAh",
-                        Description = "Аккумулятор 18650 для модов",
-                        Price = 12.99m,
+Description = "Аккумулятор 18650 для модов",
+                        Price = 52m,
                         StockQuantity = 50,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
@@ -681,7 +675,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Battery 21700 4000mAh",
                         Description = "Мощный аккумулятор 21700",
-                        Price = 15.99m,
+                        Price = 64m,
                         StockQuantity = 40,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
@@ -693,8 +687,8 @@ namespace DDLiquid.DataAccess.DB
                     new ConsumableData
                     {
                         Name = "USB-C Charger 2A",
-                        Description = "Быстрое зарядное устройство USB-C",
-                        Price = 9.99m,
+Description = "Быстрое зарядное устройство USB-C",
+                        Price = 50m,
                         StockQuantity = 70,
                         BrandId = voopoo.Id,
                         CategoryId = catCons.Id,
@@ -707,7 +701,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Drip Tip 810",
                         Description = "Широкий дрип-тип из нержавейки",
-                        Price = 3.99m,
+                        Price = 50m,
                         StockQuantity = 120,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
@@ -720,7 +714,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Coil Geekvape Z 0.4",
                         Description = "Испаритель 0.4 Ом для MTL затяжки",
-                        Price = 4.49m,
+                        Price = 50m,
                         StockQuantity = 90,
                         BrandId = geekvape.Id,
                         CategoryId = catCons.Id,
@@ -733,7 +727,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Replacement Glass 5ml",
                         Description = "Запасное стекло для бака 5мл",
-                        Price = 2.99m,
+                        Price = 50m,
                         StockQuantity = 150,
                         BrandId = voopoo.Id,
                         CategoryId = catCons.Id,
@@ -746,7 +740,7 @@ namespace DDLiquid.DataAccess.DB
                     {
                         Name = "Coil Voopoo PnP 0.3",
                         Description = "Универсальный испаритель 0.3 Ом",
-                        Price = 5.99m,
+                        Price = 50m,
                         StockQuantity = 75,
                         BrandId = voopoo.Id,
                         CategoryId = catCons.Id,

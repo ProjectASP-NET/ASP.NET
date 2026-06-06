@@ -23,6 +23,12 @@ using DDLiquid.BusinessLogic.Interfaces.Order;
 using DDLiquid.BusinessLogic.Services.Order;
 using DDLiquid.BusinessLogic.Interfaces.Admin;
 using DDLiquid.BusinessLogic.Services.Admin;
+var root = Directory.GetCurrentDirectory();
+var EnvPath = Path.Combine(root, "..", "..", ".env");
+if (File.Exists(EnvPath))
+{
+    DotNetEnv.Env.Load(EnvPath);
+}
 var builder = WebApplication.CreateBuilder(args);
 var dbConnection = builder.Configuration.GetConnectionString("DDLiquidDB");
 
