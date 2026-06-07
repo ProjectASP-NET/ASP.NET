@@ -13,6 +13,9 @@ namespace DDLiquid.Domain.Models.Auth
         [MaxLength(100)]
         public string Password { get; set; } = string.Empty;
         [Required]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        public string PasswordConfirm { get; set; } = string.Empty;
+        [Required]
         [EmailAddress]
         [MaxLength(100)]
         public string Email { get; set; } = string.Empty;

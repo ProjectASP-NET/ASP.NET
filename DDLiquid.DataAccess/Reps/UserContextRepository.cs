@@ -37,6 +37,12 @@ namespace DDLiquid.DataAccess.Reps
             var existing = await _dbSet.FindAsync(id);
             if (existing is null) return null;
 
+            var pkProperty = _context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties.FirstOrDefault();
+            if (pkProperty?.PropertyInfo != null)
+            {
+                pkProperty.PropertyInfo.SetValue(entity, id);
+            }
+
             _context.Entry(existing).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
             return existing;

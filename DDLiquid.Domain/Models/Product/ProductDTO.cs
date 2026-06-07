@@ -17,7 +17,9 @@ namespace DDLiquid.Domain.Models.Product
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
         public int LikeCount { get; set; }
+        public int? BrandId { get; set; }
         public BrandDTO? Brand { get; set; }
+        public int? CategoryId { get; set; }
         public CategoryDTO? Category { get; set; }
         public ICollection<TagDTO> Tags { get; set; } = new List<TagDTO>();
         public ICollection<ProductImageDTO> Images { get; set; } = new List<ProductImageDTO>();
