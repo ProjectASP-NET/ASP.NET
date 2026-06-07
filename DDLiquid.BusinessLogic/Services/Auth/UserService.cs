@@ -39,13 +39,6 @@ namespace DDLiquid.BusinessLogic.Services.Auth
 
         public async Task<AuthResponseData> RegisterAsync(UserRegisterData data)
         {
-            var role = data.Role?.Trim();
-            if (string.IsNullOrEmpty(role) ||
-                role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
-            {
-                throw new InvalidOperationException("Registration is only allowed for User or Manager roles");
-            }
-
             var existingByEmail = await _userRepository.GetByEmailAsync(data.Email);
             if (existingByEmail != null)
                 throw new InvalidOperationException("Email already exists");
@@ -54,9 +47,9 @@ namespace DDLiquid.BusinessLogic.Services.Auth
             if (existingByNickName != null)
                 throw new InvalidOperationException("Username already exists");
 
-            var userRole = _userRepository.GetRoleByName(role);
+            var userRole = _userRepository.GetRoleByName("User");
             if (userRole == null)
-                throw new InvalidOperationException($"Role '{role}' not found in database");
+                throw new InvalidOperationException("Role 'User' not found in database");
 
             var user = new UserData
             {

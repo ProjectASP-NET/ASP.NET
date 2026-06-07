@@ -15,6 +15,7 @@ using DDLiquid.Domain.Entities.Vape;
 using DDLiquid.Domain.Entities.Consumable;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 using DDLiquid.BusinessLogic.Helpers;
 using DDLiquid.BusinessLogic.Services.Auth;
@@ -58,7 +59,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = jwtSection["Audience"],
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key)
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            RoleClaimType = ClaimTypes.Role
         };
     });
 

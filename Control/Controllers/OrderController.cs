@@ -34,6 +34,14 @@ namespace DDLiquid.API.Controllers
             return order == null ? NotFound() : Ok(order);
         }
 
+        [HttpGet("my")]
+        public async Task<IActionResult> GetMyOrders()
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var orders = await _orderService.GetByUserIdAsync(userId);
+            return Ok(orders);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] OrderCreateDTO dto)
         {

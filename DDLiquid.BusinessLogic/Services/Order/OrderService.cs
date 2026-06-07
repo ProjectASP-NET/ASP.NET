@@ -29,6 +29,12 @@ namespace DDLiquid.BusinessLogic.Services.Order
             return order == null ? null : _mapper.Map<OrderDTO>(order);
         }
 
+        public async Task<IEnumerable<OrderDTO>> GetByUserIdAsync(int userId)
+        {
+            var orders = await _repo.GetByUserIdAsync(userId);
+            return _mapper.Map<IEnumerable<OrderDTO>>(orders);
+        }
+
         public async Task<OrderDTO> CreateAsync(int userId, OrderCreateDTO dto)
         {
             var order = new OrderData

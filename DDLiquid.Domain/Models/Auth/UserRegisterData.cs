@@ -6,7 +6,7 @@ namespace DDLiquid.Domain.Models.Auth
     {
         [Required]
         [MinLength(3)]
-        [MaxLength(50)]
+        [MaxLength(15)]
         public string Username { get; set; } = string.Empty;
         [Required]
         [MinLength(6)]
